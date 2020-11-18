@@ -1,0 +1,36 @@
+{% extends "mainApp/base.html" %}
+
+{% block content %}
+	
+	<h1>Register a Product</h1>
+
+	{% if messages %}
+    	{% for message in messages %}
+    		<!-- message.tags will denote if message is success, error etc -->
+    		<div class="alert alert-{{ message.tags }}">
+        		{{ message }}
+      		</div>
+    	{% endfor %}
+  	{% endif %}
+
+	<div class="content-section">
+		<form method="POST">
+			{% csrf_token %}
+			<fieldset class="form-group">
+				<legend class="border-bottom mb-4">Add product to database</legend>
+				{{ form }}
+			</fieldset>
+			<div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Add Product</button>
+            </div>
+		</form>
+	</div>
+
+	<!-- <form method="post">
+		{% csrf_token %}
+    	<label for="your_name">Enter Product Barcode: </label>
+    	<input id="your_name" type="text">
+    	<input type="submit" value="OK">
+	</form> -->
+
+{% endblock content %}
