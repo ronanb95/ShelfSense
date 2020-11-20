@@ -13,6 +13,17 @@ class Product(models.Model):
 	def __str__ (self):
 		return (self.brand + " " + self.productName )
 
+# class Products(models.Model):
+#     brand = models.TextField(db_column='Brand', blank=True, null=True)  # Field name made lowercase.
+#     product = models.TextField(db_column='Product', blank=True, null=True)  # Field name made lowercase.
+#     barcode = models.CharField(db_column='Barcode', primary_key=True, max_length=45)  # Field name made lowercase.
+#     unit_size = models.TextField(db_column='unit_size', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+#     weight_grams = models.FloatField()
+#
+#     class Meta:
+#         managed = False
+#         db_table = 'products'
+
 class StockControl(models.Model):
 	stockControlId = models.IntegerField(auto_created=True, primary_key=True)
 	#barcode (FK)
