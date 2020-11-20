@@ -30,7 +30,6 @@ class Product(models.Model):
 	def __str__ (self):
 		return (self.brand + " " + self.productName )
 
-#The table that does the actual monitoring, represents a single unit actually in use
 class StockControl(models.Model):
 	stockControlId = models.IntegerField(auto_created=True, primary_key=True)
 	#If product is deleted want to stop monitoring

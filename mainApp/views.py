@@ -11,6 +11,11 @@ from rest_framework.views import APIView
 import paramiko
 import sys
 import time
+from .models import *
+from django.core import serializers
+import json
+from django.http import HttpResponse, JsonResponse
+from django.forms.models import model_to_dict
 
 
 def home(request):
@@ -118,3 +123,45 @@ def registerProduct(request):
 		register_form = RegisterProductForm()
 		context = {'form':register_form}
 		return render(request, 'mainApp/register_product.html', context)
+
+def displayEntireStore(request):
+    """
+    :param request:
+    :return: the info of all products
+    """
+    info = Product.objects.all()
+    print(info)
+    tmpJson = serializers.serialize("json", info)
+    tmpObj = json.loads(tmpJson)
+
+    return HttpResponse(json.dumps(tmpObj))
+	# return JsonResponse({"models_to_return": list(info)})
+
+
+def singleProduct(request,barcode):
+    """
+    :param request:
+    :param barcode: primary key //this parameter can be removed when sending a POST request from front end page
+    :return: the product info af given barcode
+    """
+    # if request.method == 'POST':
+    #     barcode = request.POST['barcode']
+    info = Product.objects.filter(pk=barcode)
+    tmpJson = serializers.serialize("json", info)
+    tmpObj = json.loads(tmpJson)
+
+    return HttpResponse(json.dumps(tmpObj))
+
+def selectByBrand(request,brand):
+    """
+    :param request:
+    :param brand:
+    :return: the product info af given brand
+    """
+    # if request.method == 'POST':
+    #     barcode = request.POST['barcode']
+    info = Product.objects.filter(brand=brand)
+    tmpJson = serializers.serialize("json", info)
+    tmpObj = json.loads(tmpJson)
+
+    return HttpResponse(json.dumps(tmpObj))

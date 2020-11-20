@@ -82,6 +82,16 @@ DATABASES = {
        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
     # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'shelfSense',
+    #     'USER': 'root',
+    #     'PASSWORD': 'ucd123',
+    #     'HOST': '34.105.243.211',
+    #     'PORT': '3306',
+    #
+    # }
+
+    # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': 'shelfsense',
     #     'USER': 'root',
