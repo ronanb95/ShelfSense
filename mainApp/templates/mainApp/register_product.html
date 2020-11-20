@@ -1,5 +1,5 @@
 {% extends "mainApp/base.html" %}
-
+{% load crispy_forms_tags %}
 {% block content %}
 	
 	<h1>Register a Product</h1>
@@ -18,10 +18,11 @@
 			{% csrf_token %}
 			<fieldset class="form-group">
 				<legend class="border-bottom mb-4">Add product to database</legend>
-				{{ form }}
+				{{ form|crispy }}
+				<!-- <button type="submit" name="run_script">Run script</button> -->
 			</fieldset>
 			<div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Add Product</button>
+                <button class="btn btn-outline-info" type="submit" name="run_script">Get Product Weight</button>
             </div>
 		</form>
 	</div>

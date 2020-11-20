@@ -1,5 +1,5 @@
 {% extends "mainApp/base.html" %}
-
+{% load crispy_forms_tags %}
 {% block content %}
 	
 	<h1>Test Page</h1>
@@ -21,7 +21,7 @@
 			{% csrf_token %}
 			<fieldset class="form-group">
 				<legend class="border-bottom mb-4">Check if product is in database</legend>
-				{{ form }}
+				{{ form | crispy }}
 			</fieldset>
 			<div class="form-group">
                 <button class="btn btn-outline-info" type="submit">Check Barcode</button>
