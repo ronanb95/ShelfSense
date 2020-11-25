@@ -31,7 +31,7 @@ class Product(models.Model):
 		return (self.brand + " " + self.productName )
 
 class StockControl(models.Model):
-	stockControlId = models.IntegerField(auto_created=True, primary_key=True)
+	stockControl_id = models.IntegerField(auto_created=True, primary_key=True)
 	#If product is deleted want to stop monitoring
 	barcode = models.OneToOneField(Product, on_delete=models.CASCADE)
 	#Want to stop monitoring if location is deleted

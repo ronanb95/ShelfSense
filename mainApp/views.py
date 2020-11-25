@@ -129,7 +129,7 @@ def displayEntireStore(request):
     :param request:
     :return: the info of all products
     """
-    info = StockControl.objects.all()
+    info = Product.objects.all()
     print(info)
     tmpJson = serializers.serialize("json", info)
     tmpObj = json.loads(tmpJson)
