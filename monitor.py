@@ -1,12 +1,18 @@
-#Should make the last arguement the locationID(???)
+#NOTE: This script is designed to be run once and left running
+
 import sys
 import time
 import math
 import mysql.connector
 from mysql.connector import Error
+from datetime import datetime
+import random
 
 #Read arguements pass from Django's backend, can be many
-cmd_line_products = sys.argv[1:]
+location = (sys.argv[-1])
+
+#Select passed in products and their weights from command line
+cmd_line_products = sys.argv[1:-1]
 counter = 0
 
 products = []
@@ -26,7 +32,7 @@ while counter < len(cmd_line_products):
 
 
 currentW = 0
-samples = [20, 40, 60, 40, 20, 20, 20,20,50, 40, 60, 40, 20, 20, 20,20, 40, 60, 40, 20, 20, 20, 0, 0, -20]
+samples = [10,20,30,45,22,42,62,94,120,150,180,150,150,150,150,150,180,210,210,210,210,210,210,210]
 
 	
 
@@ -64,10 +70,20 @@ while i < len(samples):
 	#Only sending new information to database every 10 readings and if change detected
 	if (readings_until_send == 0 and changes > 0):
 		try:
-			connection = mysql.connector.connect(host=" ", database="shelfSense", user="root", password=" ")
+			connection = mysql.connector.connect(host="34.105.243.211", database="shelfSense", user="root", password="ucd123")
 			cursor = connection.cursor()
-			time.sleep(5)
+			#for product in products:
+				#Need to create a random stock_control id here myself
+			execution = """INSERT INTO mainApp_stockcontrol (quantity, timeAdded, barcode_id, location_id, stockControl_id) values (%s, %s, %s, %s, %s)"""
+			#Creating the randomID here purely because we are having issue with DB and this offers a brute force solution
+			for product in products:
+				randomID = random.randint(1,100000000000)
+				#Want to set the current time for timestamp
+				dateTimeObj = datetime.now()
+				recordTuple = (product["Quantity"], dateTimeObj, product['Product'], location, randomID)
+				cursor.execute(execution, recordTuple)
 			#Want to then create a loop over products and enter the information into the database
+			connection.commit()
 			cursor.close()
 		except mysql.connector.Error as error:
 			print(error)
@@ -76,9 +92,7 @@ while i < len(samples):
 				connection.close()
 
 
-		# print("Sending data to database")
-		# time.sleep(10)
-		# print("Sending successful")
+		#Increase this for less frequent database sends, decrease to increase sends
 		readings_until_send = 10
 		changes = 0
 
@@ -92,5 +106,3 @@ while i < len(samples):
 
 
 
-
- 
