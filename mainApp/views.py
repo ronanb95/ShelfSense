@@ -16,6 +16,8 @@ from django.core import serializers
 import json
 from django.http import HttpResponse, JsonResponse
 from django.forms.models import model_to_dict
+from rest_framework import status
+from rest_framework.response import Response
 
 
 def home(request):
@@ -123,6 +125,22 @@ def registerProduct(request):
         register_form = RegisterProductForm()
         context = {'form':register_form}
         return render(request, 'mainApp/register_product.html', context)
+
+def startMonitor(request):
+
+	if request.method == "POST":
+		pass
+	else:
+		return render(request, 'mainApp/startMonitor.html')
+
+class startMonitoringProcess(generics.RetrieveAPIView):
+	def get(self, request):
+		barcode1 = request.query_params.get('barcode1')
+		print("Barcode1 from form is: ", barcode1)
+		error_data = "ERROR, problem with Real Time API"
+		return Response(error_data, status=status.HTTP_503_SERVICE_UNAVAILABLE)
+
+
 
 def displayEntireStore(request):
     """

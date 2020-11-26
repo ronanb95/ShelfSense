@@ -88,17 +88,7 @@ DATABASES = {
         'PASSWORD': 'ucd123',
         'HOST': '34.105.243.211',
         'PORT': '3306',
-
     }
-
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': 'shelfsense',
-    #     'USER': 'root',
-    #     'PASSWORD': '',
-    #     'HOST': '34.105.243.211',
-    #     'PORT':'3306'
-    # }
 }
 
 
