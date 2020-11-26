@@ -126,19 +126,34 @@ def registerProduct(request):
         context = {'form':register_form}
         return render(request, 'mainApp/register_product.html', context)
 
-def startMonitor(request):
-
+def setUpDevice(request):
 	if request.method == "POST":
 		pass
 	else:
 		return render(request, 'mainApp/startMonitor.html')
 
+#Starts monitoring process and passes arguements to the pi
 class startMonitoringProcess(generics.RetrieveAPIView):
-	def get(self, request):
-		barcode1 = request.query_params.get('barcode1')
-		print("Barcode1 from form is: ", barcode1)
-		error_data = "ERROR, problem with Real Time API"
-		return Response(error_data, status=status.HTTP_503_SERVICE_UNAVAILABLE)
+    def get(self, request):
+        barcode1 = request.query_params.get('barcode1')
+        barcode2 = request.query_params.get('barcode2')
+        barcode3 = request.query_params.get('barcode3')
+        barcode4 = request.query_params.get('barcode4')
+        barcode5 = request.query_params.get('barcode5')
+        print("Barcodes received are: ", barcode1, barcode2, barcode3, barcode4, barcode5)
+        success_data = "Great, the unit is up and running..."
+        #error_data = "Error, issue with connecting to unit..."
+        return Response(success_data, status=status.HTTP_503_SERVICE_UNAVAILABLE)
+
+
+
+
+	# def get(self, request):
+ #        barcode2 = request.query_params.get('barcode2')
+	# 	barcode1 = request.query_params.get('barcode1')
+	# 	print("Barcode1 from form is: ", barcode1, barcode2, barcode3, barcode4, barcode5)
+	# 	error_data = "ERROR, problem with Real Time API"
+	# 	return Response(error_data, status=status.HTTP_503_SERVICE_UNAVAILABLE)
 
 
 
@@ -235,6 +250,19 @@ def selectByTime(request):
 
 
 
+    tmpJson = serializers.serialize("json", info)
+    tmpObj = json.loads(tmpJson)
+
+    return HttpResponse(json.dumps(tmpObj))
+
+
+def selectLocation(request):
+    """
+    :param request:
+    :return: the info of all products
+    """
+    info = Location.objects.all()
+    print(info)
     tmpJson = serializers.serialize("json", info)
     tmpObj = json.loads(tmpJson)
 

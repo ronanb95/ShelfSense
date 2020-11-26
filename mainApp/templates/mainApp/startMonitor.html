@@ -3,15 +3,16 @@
 
 <h1> Follow the instructions below to begin monitoring products </h1>
 
-<div class="form-style-8">
+<div class="form-style-8" id="innerMessage">
 	<form id="monitorForm">
-		<input type="text" name="field1" placeholder="Enter the location code..." id="locationCode"/>
-	    <input type="text" name="field2" placeholder="Enter First Product Barcode..." id="barcode1"/>
-	    <input type="text" name="field3" placeholder="Enter Second Product Barcode..." id="barcode2"/>
-	    <input type="text" name="field4" placeholder="Enter Third Product Barcode..." id="barcode3"/>
-	    <input type="text" name="field5" placeholder="Enter Fourth Product Barcode..." id="barcode4"/>
-	    <input type="text" name="field6" placeholder="Enter Fifth Product Barcode..." id="barcode5"/>
+		<input type="text" name="field1" placeholder="Scan the Location Code..." id="locationCode"/>
+	    <input type="text" name="field2" placeholder="Scan First Product Barcode..." id="barcode1"/>
+	    <input type="text" name="field3" placeholder="Scan Second Product Barcode (Leave Blank if Finished)..." id="barcode2"/>
+	    <input type="text" name="field4" placeholder="Scan Third Product Barcode (Leave Blank if Finished)..." id="barcode3"/>
+	    <input type="text" name="field5" placeholder="Scan Fourth Product Barcode (Leave Blank if Finished)..." id="barcode4"/>
+	    <input type="text" name="field6" placeholder="Scan Fifth Product Barcode (Leave Blank if Finished)..." id="barcode5"/>
 	</form>
+		<input type="button" value="Start Monitoring" id="startbtn"/>
 </div>
 
 {% endblock content %}
