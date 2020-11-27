@@ -18,6 +18,7 @@ from django.http import HttpResponse, JsonResponse
 from django.forms.models import model_to_dict
 from rest_framework import status
 from rest_framework.response import Response
+from django.db.models import F
 
 
 def home(request):
@@ -274,4 +275,16 @@ def selectLocation(request):
     tmpObj = json.loads(tmpJson)
 
     return HttpResponse(json.dumps(tmpObj))
+
+def lowStockLevel(request):
+    """
+        :param request:
+        :return: low stock level products
+        """
+    info = Product.objects.filter(lowStockLevel__gte=F('stockcontrol__quantity')).values('productName','brand','stockcontrol__location','lowStockLevel','stockcontrol__quantity')
+
+    response = json.dumps(list(info))
+    return HttpResponse(response)
+
+
 
