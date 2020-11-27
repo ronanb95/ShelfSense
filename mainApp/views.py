@@ -22,7 +22,7 @@ from django.db.models import F
 
 
 def home(request):
-    return render(request, "mainApp/home.html")
+    return render(request, "mainApp/datatable.html")
 
 def about(request):
     return render(request, "mainApp/about.html")
