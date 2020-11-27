@@ -179,11 +179,11 @@ def singleProduct(request,barcode):
     """
     # if request.method == 'POST':
     #     barcode = request.POST['barcode']
-    info = Product.objects.filter(pk=barcode)
-    tmpJson = serializers.serialize("json", info)
-    tmpObj = json.loads(tmpJson)
-
-    return HttpResponse(json.dumps(tmpObj))
+    info = Product.objects.filter(pk=barcode).values('productName','brand','stockcontrol__location','stockcontrol__quantity')
+    # tmpJson = serializers.serialize("json", info)
+    # tmpObj = json.loads(tmpJson)
+    response = json.dumps(list(info))
+    return HttpResponse(response)
 
 def selectByBrand(request,brand):
     """
@@ -193,11 +193,13 @@ def selectByBrand(request,brand):
     """
     # if request.method == 'POST':
     #     barcode = request.POST['barcode']
-    info = Product.objects.filter(brand=brand)
-    tmpJson = serializers.serialize("json", info)
-    tmpObj = json.loads(tmpJson)
-
-    return HttpResponse(json.dumps(tmpObj))
+    info = Product.objects.filter(brand=brand).values('productName','brand','stockcontrol__location','stockcontrol__quantity')
+    # tmpJson = serializers.serialize("json", info)
+    # tmpObj = json.loads(tmpJson)
+    #
+    # return HttpResponse(json.dumps(tmpObj))
+    response = json.dumps(list(info))
+    return HttpResponse(response)
 
 
 def selectByLocation(request, location):
@@ -218,7 +220,7 @@ def selectByLocation(request, location):
     # print(barcode)
     # context={}
     # count = 1
-    info = Product.objects.filter(stockcontrol__location=location).select_related()
+    info = Product.objects.filter(stockcontrol__location=location).select_related().values('productName','brand','stockcontrol__location','stockcontrol__quantity')
     # for i in info:
     #     context[count] = [i.barcode, i.productName,i.brand,i.]
     #     print("a")
@@ -234,10 +236,13 @@ def selectByLocation(request, location):
 # do something with related object instance
 
     # info = StockControl.objects.all()
-    tmpJson = serializers.serialize("json", info)
-    tmpObj = json.loads(tmpJson)
+    # tmpJson = serializers.serialize("json", info)
+    # tmpObj = json.loads(tmpJson)
+    #
+    # return HttpResponse(json.dumps(tmpObj))
+    response = json.dumps(list(info))
+    return HttpResponse(response)
 
-    return HttpResponse(json.dumps(tmpObj))
 
 def selectByTime(request):
     """
@@ -246,14 +251,16 @@ def selectByTime(request):
     :return: the last 10 records
     """
     # info = StockControl.objects.all().order_by('timeAdded')
-    info = Product.objects.all().select_related('stockcontrol').order_by('-stockcontrol__timeAdded')[:10]
+    info = Product.objects.all().select_related('stockcontrol').order_by('-stockcontrol__timeAdded')[:10].values('productName','brand','stockcontrol__location','stockcontrol__quantity')
 
 
 
-    tmpJson = serializers.serialize("json", info)
-    tmpObj = json.loads(tmpJson)
-
-    return HttpResponse(json.dumps(tmpObj))
+    # tmpJson = serializers.serialize("json", info)
+    # tmpObj = json.loads(tmpJson)
+    #
+    # return HttpResponse(json.dumps(tmpObj))
+    response = json.dumps(list(info))
+    return HttpResponse(response)
 
 
 def selectLocation(request):
