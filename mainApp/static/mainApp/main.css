@@ -158,6 +158,12 @@ a.article-title:hover {
   background-color:#34CACA;
 }
 
-#barcode1, #barcode2, #barcode3, #barcode4, #barcode5, #startbtn{
+#barcode1, #barcode2, #barcode3, #barcode4, #barcode5, #startbtn, #addbtn{
+  display: none;
+}
+
+.notRecognized{
+  font-size:15px;
+  color: red;
   display: none;
 }
