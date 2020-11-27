@@ -1,11 +1,95 @@
-{% extends "mainApp/base.html" %}
-{% block content %}
-	
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+{% extends "mainApp/base.html" %}{% block content %}
+    {#  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod#}
+    {#  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,#}
+    {#  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo#}
+    {#  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse#}
+    {#  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non#}
+    {#  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p >#}
+    <div class="row" style="margin-top: 20px">
+        <div class="col-md-12">
+            <div>
+                <form class="bs-example bs-example-form" role="form">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="input-group"><input type="text" class="form-control barcode"
+                                                            placeholder="barcode"> <span class="input-group-btn">                        <button
+                                    class="btn btn-primary barcodebtn" type="button">Search</button>                    </span>
+                            </div><!-- /input-group -->                        </div><!-- /.col-lg-6 -->
+                        <div class="col-lg-6">
+                            <div class="input-group"><input type="text" class="form-control brand" placeholder="brand">
+                                <span class="input-group-btn">                        <button
+                                        class="btn btn-primary brandbtn" type="button">Search</button>                    </span>
+                            </div><!-- /input-group -->                        </div><!-- /.col-lg-6 -->
+                        <div class="col-lg-6">
+                            <div class="input-group"><input type="text" class="form-control location"
+                                                            placeholder="location"> <span class="input-group-btn">                        <button
+                                    class="btn btn-primary locationbtn" type="button">Search</button>                    </span>
+                            </div><!-- /input-group -->                        </div><!-- /.col-lg-6 -->
+                    </div><!-- /.row -->                </form>
+            </div>
+        </div>
+    </div>
+    <div class="main_content row" style="margin-top: 20px">
+        <div class="col-md-12">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>brand</th>
+                    <th>productName</th>
+                    <th>unitSize</th>
+                    <th>weightGrams</th>
+                    <th>lowStockLevel</th>
+                </tr>
+                </thead>
+                <tbody class="content_info">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>        function innHtml(data) {
+        var dataJson = $.parseJSON(data);
+        var content = "";
+        for (var i = 0; i < dataJson.length; i++) {
+            content += " <tr>\n" + "      <td>";
+            content += dataJson[i]["fields"]["brand"];
+            content += "</td>\n" + "      <td>";
+            content += dataJson[i]["fields"]["productName"];
+            content += "</td>\n" + "      <td>";
+            content += dataJson[i]["fields"]["unitSize"];
+            content += "</td>\n" + "      <td>";
+            content += dataJson[i]["fields"]["weightGrams"];
+            content += "</td>\n" + "      <td>";
+            content += dataJson[i]["fields"]["lowStockLevel"];
+            content += "</td>"
+        }
+        content += "</tr>"
+        $(".content_info").html(content)
+    }
+
+    $(document).ready(function () {
+        $.get("/default", function (data) {
+            innHtml(data)
+        })
+    });
+
+    $(".brandbtn").click(function () {
+        $.get("/brand/" + $(".brand").val() + "/", function (data) {
+            innHtml(data)
+        })
+    });
+    $(".barcodebtn").click(function () {
+        $.get("/barcode/" + $(".barcode").val() + "/", function (data) {
+            innHtml(data)
+        })
+    });
+    $(".locationbtn").click(function () {
+        $.get("/location/" + $(".location").val() + "/", function (data) {
+            innHtml(data)
+        })
+    });
+    </script>
+
+
 
 {% endblock content %}
