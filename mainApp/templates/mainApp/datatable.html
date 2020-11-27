@@ -1,8 +1,8 @@
 {% extends "mainApp/base.html" %}{% block content %}
 {% load static %}
-    <!-- <div id="preloader">
+    <div id="preloader">
         <div class="loader"></div>
-    </div> -->
+    </div>
     <!-- preloader area end -->
     <!-- page container area start -->
     <div class="page-container">
@@ -267,4 +267,16 @@
         <!-- footer area end-->
     </div>
     <!-- page container area end -->
+
 {% endblock content %}
+
+<script type="text/javascript">
+    function noLoader(){
+        setTimeout(function () {
+            document.getElementById('preloader').style.display = "none"
+            alert("done")
+        }, 1000);
+    }
+
+    nonLoader();
+</script>
