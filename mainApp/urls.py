@@ -15,7 +15,10 @@ urlpatterns = [
     path('default/', views.selectByTime, name='selectByTime'),
     path('selectLocation/', views.selectLocation, name='selectLocation'),
     path('lowLevelStock/', views.lowStockLevel, name='lowLevelStock'),
+    path('login/', views.login_view, name="login"),
+    path('register/', views.register_user, name="register"),
+    path('user/', views.user_page, name="user"),
 
-    #Start monitor form
+    # Start monitor form
     path('startMonitoringProcess/', views.startMonitoringProcess.as_view(), name="startMonitoringProcess")
 ]
