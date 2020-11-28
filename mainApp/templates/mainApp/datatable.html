@@ -1,5 +1,14 @@
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+
+
 {% extends "mainApp/base.html" %}{% block content %}
 {% load static %}
+    <script>
+    var trendDownIcon = "{% static "mainApp/images/icon/market-value/trends-down-icon.png" %}";
+    console.log("aa");
+    console.log(trendDownIcon);
+</script>
+
     <div id="preloader">
         <div class="loader"></div>
     </div>
@@ -182,58 +191,51 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="d-sm-flex justify-content-between align-items-center">
-                                        <h4 class="header-title mb-0">Currently Low Stock Levels</h4>
+                                        <h4 class="header-title mb-0" >Currently Low Stock Levels</h4>
                                     </div>
-                                    <div class="market-status-table mt-4">
-                                        <div class="table-responsive">
-                                            <table class="dbkit-table">
-                                                <tr class="heading-td">
-                                                    <td class="mv-icon">Brand Name</td>
-                                                    <td class="coin-name">Product Name</td>
-                                                    <td class="buy">Location</td>
-                                                    <td class="sell">Current Stock Level</td>
-                                                    <td class="trends">Trends</td>
-                                                    <td class="attachments">Attachments</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="mv-icon"><img src="{% static 'mainApp/images/icon/market-value/icon1.png' %}" alt="icon">
-                                                    </td>
-                                                    <td class="coin-name">Dashcoin</td>
-                                                    <td class="buy">30% <img src="{% static 'mainApp/images/icon/market-value/triangle-down.png' %}" alt="icon"></td>
-                                                    <td class="sell">20% <img src="{% static 'mainApp/images/icon/market-value/triangle-up.png' %}" alt="icon"></td>
-                                                    <td class="trends"><img src="{% static 'mainApp/images/icon/market-value/trends-up-icon.png' %}" alt="icon"></td>
-                                                    <td class="attachments">$ 56746,857</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="mv-icon">
-                                                        <div class="mv-icon"><img src="{% static 'mainApp/images/icon/market-value/icon2.png' %}" alt="icon"></div>
-                                                    </td>
-                                                    <td class="coin-name">LiteCoin</td>
-                                                    <td class="buy">30% <img src="{% static 'mainApp/images/icon/market-value/triangle-down.png' %}" alt="icon"></td>
-                                                    <td class="sell">20% <img src="{% static 'mainApp/images/icon/market-value/triangle-up.png' %}" alt="icon"></td>
-                                                    <td class="trends"><img src="{% static 'mainApp/images/icon/market-value/trends-down-icon.png' %}" alt="icon"></td>
-                                                    <td class="attachments">$ 56746,857</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="mv-icon">
-                                                        <div class="mv-icon"><img src="{% static 'mainApp/images/icon/market-value/icon3.png' %}" alt="icon"></div>
-                                                    </td>
-                                                    <td class="coin-name">Euthorium</td>
-                                                    <td class="buy">30% <img src="{% static 'mainApp/images/icon/market-value/triangle-down.png' %}" alt="icon"></td>
-                                                    <td class="sell">20% <img src="{% static 'mainApp/images/icon/market-value/triangle-up.png' %}" alt="icon"></td>
-                                                    <td class="trends"><img src="{% static 'mainAppages/icon/market-value/trends-up-icon.png' %}" alt="icon"></td>
-                                                    <td class="attachments">$ 56746,857</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="mv-icon">
-                                                        <div class="mv-icon"><img src="{% static 'mainAppassets/images/icon/market-value/icon4.png' %}" alt="icon"></div>
-                                                    </td>
-                                                    <td class="coin-name">Bitcoindash</td>
-                                                    <td class="buy">30% <img src="{% static 'mainApp/images/icon/market-value/triangle-down.png' %}" alt="icon"></td>
-                                                    <td class="sell">20% <img src="{% static 'mainApp/images/icon/market-value/triangle-up.png' %}" alt="icon"></td>
-                                                    <td class="trends"><img src="{% static 'mainApp/images/icon/market-value/trends-up-icon.png' %}" alt="icon"></td>
-                                                    <td class="attachments">$ 56746,857</td>
-                                                </tr>
+                                    <div class="market-status-table mt-4" >
+                                        <div class="table-responsive" >
+                                            <table class="dbkit-table" id="lowStock">
+{##}
+{#                                                <tr>#}
+{#                                                    <td class="mv-icon"><img src="{% static 'mainApp/images/icon/market-value/icon1.png' %}" alt="icon">#}
+{#                                                    </td>#}
+{#                                                    <td class="coin-name">Dashcoin</td>#}
+{#                                                    <td class="buy">30% <img src="{% static 'mainApp/images/icon/market-value/triangle-down.png' %}" alt="icon"></td>#}
+{#                                                    <td class="sell">20% <img src="{% static 'mainApp/images/icon/market-value/triangle-up.png' %}" alt="icon"></td>#}
+{#                                                    <td class="trends"><img src="{% static 'mainApp/images/icon/market-value/trends-up-icon.png' %}" alt="icon"></td>#}
+{#                                                    <td class="attachments">$ 56746,857</td>#}
+{#                                                </tr>#}
+{#                                                <tr>#}
+{#                                                    <td class="mv-icon">#}
+{#                                                        <div class="mv-icon"><img src="{% static 'mainApp/images/icon/market-value/icon2.png' %}" alt="icon"></div>#}
+{#                                                    </td>#}
+{#                                                    <td class="coin-name">LiteCoin</td>#}
+{#                                                    <td class="buy">30% <img src="{% static 'mainApp/images/icon/market-value/triangle-down.png' %}" alt="icon"></td>#}
+{#                                                    <td class="sell">20% <img src="{% static 'mainApp/images/icon/market-value/triangle-up.png' %}" alt="icon"></td>#}
+{#                                                    <td class="trends"><img src="{% static 'mainApp/images/icon/market-value/trends-down-icon.png' %}" alt="icon"></td>#}
+{#                                                    <td class="attachments">$ 56746,857</td>#}
+{#                                                </tr>#}
+{#                                                <tr>#}
+{#                                                    <td class="mv-icon">#}
+{#                                                        <div class="mv-icon"><img src="{% static 'mainApp/images/icon/market-value/icon3.png' %}" alt="icon"></div>#}
+{#                                                    </td>#}
+{#                                                    <td class="coin-name">Euthorium</td>#}
+{#                                                    <td class="buy">30% <img src="{% static 'mainApp/images/icon/market-value/triangle-down.png' %}" alt="icon"></td>#}
+{#                                                    <td class="sell">20% <img src="{% static 'mainApp/images/icon/market-value/triangle-up.png' %}" alt="icon"></td>#}
+{#                                                    <td class="trends"><img src="{% static 'mainAppages/icon/market-value/trends-up-icon.png' %}" alt="icon"></td>#}
+{#                                                    <td class="attachments">$ 56746,857</td>#}
+{#                                                </tr>#}
+{#                                                <tr>#}
+{#                                                    <td class="mv-icon">#}
+{#                                                        <div class="mv-icon"><img src="{% static 'mainAppassets/images/icon/market-value/icon4.png' %}" alt="icon"></div>#}
+{#                                                    </td>#}
+{#                                                    <td class="coin-name">Bitcoindash</td>#}
+{#                                                    <td class="buy">30% <img src="{% static 'mainApp/images/icon/market-value/triangle-down.png' %}" alt="icon"></td>#}
+{#                                                    <td class="sell">20% <img src="{% static 'mainApp/images/icon/market-value/triangle-up.png' %}" alt="icon"></td>#}
+{#                                                    <td class="trends"><img src="{% static 'mainApp/images/icon/market-value/trends-up-icon.png' %}" alt="icon"></td>#}
+{#                                                    <td class="attachments">$ 56746,857</td>#}
+{#                                                </tr>#}
                                             </table>
                                         </div>
                                     </div>
@@ -279,4 +281,6 @@
     }
 
     nonLoader();
+
+
 </script>
