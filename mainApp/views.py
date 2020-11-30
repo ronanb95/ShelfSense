@@ -26,16 +26,12 @@ from django.forms.utils import ErrorList
 from django.http import HttpResponse
 from .forms import LoginForm, SignUpForm
 
-
+#Basic homepage render
 def home(request):
     return render(request, "mainApp/datatable.html")
 
-def about(request):
-    return render(request, "mainApp/about.html")
-
-
+#Function connects to PI and gets Weigth reading to register product
 def getWeight():
-
     try:
         client = paramiko.SSHClient()
         print("Connected")
@@ -44,7 +40,7 @@ def getWeight():
         client.load_system_host_keys()
         client.connect('192.168.0.45', username='pi', password='raspberry')
 
-        stdin, stdout, stderr = client.exec_command('python	example2.py')
+        stdin, stdout, stderr = client.exec_command('python	getWeight.py')
         print("Running script")
         while not stdout.channel.exit_status_ready():
             if stdout.channel.recv_ready():
@@ -56,50 +52,32 @@ def getWeight():
         print("Error in connection")
         weight = "No connection"
         # If weight is -5000 know that could not commuincate with pi
-
-
     return weight
-    #return  render(request, 'mainApp/test.html', context)
 
 
-#In current form can be used to add products
-def test(request):
-
-    barcode_form = ProductBarcodeForm()
-    #Example Query of database
-    context = {
-        'weight':Product.objects.last().weightGrams,
-        'form':barcode_form
-    }
-
-    if request.method == 'POST':
-        form = ProductBarcodeForm(request.POST)
-        #Form will be valid if the product is found in the data
-        if form.is_valid():
-            print("Valid form")
-            messages.warning(request, 'Product was not found, please add now')
-            return redirect('register_product')
-            #Create a redirect here to a page that registers the products
-        else:
-            #Form will not be valid if the product barcode is in the database
-            print("Not valid form")
-            scannedBarcode = form.data['barcode']
-            product = Product.objects.get(barcode=scannedBarcode)
-            messages.success(request, f'Great, {product} was found in database')
-            return redirect('testPage')
-
-
-    return  render(request, 'mainApp/test.html', context)
-
-
+# Check and Register Product Page
 def registerProduct(request):
 
-    if request.method == 'POST' and 'run_script' in request.POST:
+    #### Barcoode checking form
+    if request.method == 'POST' and 'barcode_check' in request.POST:
+        form = ProductBarcodeForm(request.POST)
+        if form.is_valid():
+            messages.warning(request, 'Product was not found, please add now')
+            register_form = RegisterProductForm()
+            context = {'form':register_form}
+            return render(request,'mainApp/register_product.html',context)
+        else:
+            scannedBarcode = form.data['barcode']
+            product = Product.objects.get(barcode=scannedBarcode)
+            messages.success(request, f'Great, {product} was found in database. Please check the next product now')
+            return redirect('register_product')
+
+    #### Product Registration form
+    elif request.method == 'POST' and 'run_script' in request.POST:
         form = RegisterProductForm(request.POST)
         #Form will be valid if the product is found in the data
         if form.is_valid():
             weight = getWeight()
-            print(weight)
             #No weigth has been detected
             if weight == "None":
                 messages.warning(request, 'Error, no weight detected')
@@ -118,8 +96,14 @@ def registerProduct(request):
                 newProduct = Product(barcode=barcode, brand=brand, productName=productName, unitSize=unitSize, weightGrams=weight)
                 newProduct.save()
                 messages.success(request, f'Successfully created product {brand} {productName}')
-                return redirect('testPage')
+                barcode_form = ProductBarcodeForm()
+                context = {
+                    'check_form':barcode_form,
+                   # 'form':register_form
+                }
+                return render(request, 'mainApp/register_product.html', context)
 
+        #Barcode provided for registration form already exists
         else:
             print("invalid form")
             scannedBarcode = form.data['barcode']
@@ -127,10 +111,12 @@ def registerProduct(request):
             messages.warning(request, f'Barcode {scannedBarcode} already attached to {product}')
             return redirect('register_product')
 
-    #A GET request
+    #A standard GET request
     else:
-        register_form = RegisterProductForm()
-        context = {'form':register_form}
+        barcode_form = ProductBarcodeForm()
+        context = {
+            'check_form':barcode_form,
+        }
         return render(request, 'mainApp/register_product.html', context)
 
 def setUpDevice(request):

@@ -6,32 +6,41 @@
 
 	{% if messages %}
     	{% for message in messages %}
-    		<!-- message.tags will denote if message is success, error etc -->
     		<div class="alert alert-{{ message.tags }}">
         		{{ message }}
       		</div>
     	{% endfor %}
   	{% endif %}
 
-	<div class="content-section">
-		<form method="POST">
-			{% csrf_token %}
-			<fieldset class="form-group">
-				<legend class="border-bottom mb-4">Add product to database</legend>
-				{{ form|crispy }}
-				<!-- <button type="submit" name="run_script">Run script</button> -->
-			</fieldset>
-			<div class="form-group">
-                <button class="btn btn-outline-info" type="submit" name="run_script">Get Product Weight</button>
-            </div>
-		</form>
-	</div>
+  	{% if check_form %}
+		<div class="content-section">
+			<form method="POST">
+				{% csrf_token %}
+				<fieldset class="form-group">
+					<legend class="border-bottom mb-4">Check if product is in database</legend>
+					{{ check_form | crispy }}
+				</fieldset>
+				<div class="form-group">
+	                <button class="btn btn-outline-info" type="submit" name="barcode_check">Check Barcode</button>
+	            </div>
+			</form>
+		</div>
+	{% endif %}
 
-	<!-- <form method="post">
-		{% csrf_token %}
-    	<label for="your_name">Enter Product Barcode: </label>
-    	<input id="your_name" type="text">
-    	<input type="submit" value="OK">
-	</form> -->
+  	{% if form %}
+		<div class="content-section">
+			<form method="POST">
+				{% csrf_token %}
+				<fieldset class="form-group">
+					<legend class="border-bottom mb-4">Add product to database</legend>
+					{{ form|crispy }}
+					<!-- <button type="submit" name="run_script">Run script</button> -->
+				</fieldset>
+				<div class="form-group">
+	                <button class="btn btn-outline-info" type="submit" name="run_script">Get Product Weight</button>
+	            </div>
+			</form>
+		</div>
+	{% endif %}
 
 {% endblock content %}
