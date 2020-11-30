@@ -18,7 +18,7 @@ from django.http import HttpResponse, JsonResponse
 from django.forms.models import model_to_dict
 from rest_framework import status
 from rest_framework.response import Response
-from django.db.models import F
+from django.db.models import F, Count
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
@@ -172,7 +172,7 @@ def singleProduct(request,barcode):
     """
     # if request.method == 'POST':
     #     barcode = request.POST['barcode']
-    info = Product.objects.filter(pk=barcode).values('productName','brand','stockcontrol__location','stockcontrol__quantity')
+    info = Product.objects.filter(pk=barcode).values('barcode','productName','brand','stockcontrol__location','stockcontrol__quantity')
     # tmpJson = serializers.serialize("json", info)
     # tmpObj = json.loads(tmpJson)
     response = json.dumps(list(info))
@@ -186,7 +186,7 @@ def selectByBrand(request,brand):
     """
     # if request.method == 'POST':
     #     barcode = request.POST['barcode']
-    info = Product.objects.filter(brand=brand).values('productName','brand','stockcontrol__location','stockcontrol__quantity')
+    info = Product.objects.filter(brand=brand).values('barcode','productName','brand','stockcontrol__location','stockcontrol__quantity')
     # tmpJson = serializers.serialize("json", info)
     # tmpObj = json.loads(tmpJson)
     #
@@ -213,7 +213,7 @@ def selectByLocation(request, location):
     # print(barcode)
     # context={}
     # count = 1
-    info = Product.objects.filter(stockcontrol__location=location).select_related().values('productName','brand','stockcontrol__location','stockcontrol__quantity')
+    info = Product.objects.filter(stockcontrol__location=location).select_related().values('barcode','productName','brand','stockcontrol__location','stockcontrol__quantity')
     # for i in info:
     #     context[count] = [i.barcode, i.productName,i.brand,i.]
     #     print("a")
@@ -244,7 +244,7 @@ def selectByTime(request):
     :return: the last 10 records
     """
     # info = StockControl.objects.all().order_by('timeAdded')
-    info = Product.objects.all().select_related('stockcontrol').order_by('-stockcontrol__timeAdded')[:10].values('productName','brand','stockcontrol__location','stockcontrol__quantity')
+    info = Product.objects.all().select_related('stockcontrol').order_by('-stockcontrol__timeAdded')[:10].values('barcode','productName','brand','stockcontrol__location','stockcontrol__quantity')
 
 
 
@@ -273,8 +273,15 @@ def lowStockLevel(request):
         :param request:
         :return: low stock level products
         """
-    info = Product.objects.filter(lowStockLevel__gte=F('stockcontrol__quantity')).values('productName','brand','stockcontrol__location','lowStockLevel','stockcontrol__quantity')
 
+    # distinct = Product.objects.order_by('-stockcontrol__timeAdded').filter(lowStockLevel__gte=F('stockcontrol__quantity')).values(
+    #     'barcode'
+    # ).annotate(
+    #     barcode_count=Count('barcode')
+    # ).filter(barcode_count=1)
+    # info = Product.objects.filter(lowStockLevel__gte=F('stockcontrol__quantity')).order_by('barcode').values('barcode').distinct().values('barcode','productName','brand','stockcontrol__location','lowStockLevel','stockcontrol__quantity')
+    info = Product.objects.filter(lowStockLevel__gte=F('stockcontrol__quantity')).values('barcode','productName','brand','stockcontrol__location','lowStockLevel','stockcontrol__quantity').order_by('barcode','-stockcontrol__timeAdded')
+    print(info)
     response = json.dumps(list(info))
     return HttpResponse(response)
 

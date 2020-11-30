@@ -24,6 +24,7 @@ $(function () {
             var icon = trendDownIcon;
             console.log("hiiii");
             content += "<tr class=\"heading-td\">\n" +
+                "                                                    <td class=\"mv-icon\">Barcode</td>\n" +
                 "                                                    <td class=\"mv-icon\">Brand Name</td>\n" +
                 "                                                    <td class=\"coin-name\">Product Name</td>\n" +
                 "                                                    <td class=\"buy\">Location</td>\n" +
@@ -31,8 +32,15 @@ $(function () {
                 "                                                    <td class=\"trends\">Low Stock Level</td>\n" +
                 "                                                    <td class=\"attachments\">    Trends of Stock</td>\n" +
                 "                                                </tr>";
+            var barcode = "";
             for (var i = 0; i < dataJson.length; i++) {
-                content += " <tr>\n" + "      <td>";
+                if (barcode === dataJson[i]["barcode"]){
+
+                }else{
+                    barcode = dataJson[i]["barcode"];
+                    content += " <tr>\n" + "      <td>";
+                content += dataJson[i]["barcode"];
+                content += "</td>\n" + "      <td>";
                 content += dataJson[i]["brand"];
                 content += "</td>\n" + "      <td>";
                 content += dataJson[i]["productName"];
@@ -46,6 +54,8 @@ $(function () {
 
                 content += dataJson[i]["lowStockLevel"];
                 content += "</td>\n" + "<td class=\"trends\"><img src=" +icon+" alt=\"icon\"></td>";
+                }
+
                 // content += "</td>";
             }
             content += "</tr>";
