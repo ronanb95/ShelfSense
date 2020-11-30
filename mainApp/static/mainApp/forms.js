@@ -130,13 +130,14 @@ document.getElementById('startbtn').addEventListener('click', function(event){
       barcode3 = b3.value;
       barcode4 = b4.value;
       barcode5 = b5.value;
+      loc = document.getElementById('locationCode').value;
       error1.style.display = "none";
       error2.style.display = "none";
       error3.style.display = "none";
       error4.style.display = "none";
       error5.style.display = "none";
       //Actual passing of all the information
-      fetch("http://localhost:8000/startMonitoringProcess/?barcode1="+barcode1+"&barcode2="+barcode2+"&barcode3="+barcode3+"&barcode4="+barcode4+"&barcode5="+barcode5)
+      fetch("http://localhost:8000/startMonitoringProcess/?location="+loc+"&barcode1="+barcode1+"&barcode2="+barcode2+"&barcode3="+barcode3+"&barcode4="+barcode4+"&barcode5="+barcode5)
       .then(response => {
         return response.json()
       })

@@ -83,7 +83,7 @@
                                     <span>Set Up</span></a>
                                 <ul class="collapse">
                                     <li><a href="{% url 'register_product' %}">Product Registration</a></li>
-                                    <li><a href="table-layout.html">Unit Set Up</a></li>
+                                    <li><a href="{% url 'setupdevice' %}">Unit Set Up</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -136,14 +136,6 @@
 {% block content %}{% endblock %}
 
 
-      <!-- footer area start-->
-      <footer>
-          <div class="footer-area">
-            <p>ShelfSense© Copyright 2020. All right reserved.</p>
-          </div>
-      </footer>
-    </div>
-  </div>
 </body>
 
 
@@ -160,6 +152,7 @@
         crossorigin="anonymous"></script>
 <script type="text/javascript" src="{% static 'mainApp/forms.js' %}"></script>
 <script type="text/javascript" src="{% static 'mainApp/js/loader.js' %}"></script>
+<script type="text/javascript" src="{% static 'mainApp/js/productTable.js' %}"></script>
 
 
 <!-- jquery latest version -->

@@ -54,6 +54,37 @@ def getWeight():
         # If weight is -5000 know that could not commuincate with pi
     return weight
 
+#Actually start the monitoring process
+def startUnit(barcodes, weights, location):
+    
+    print(barcodes)
+    print(weights)
+    commandString = "python3 completeMonitor.py "
+
+    for i in range(0, len(barcodes)):
+        print("i is: ", i)
+        commandString = commandString + barcodes[i] + " "
+        commandString = commandString + str(weights[i]) + " "
+
+    commandString = commandString + str(location)
+
+    print(commandString)
+
+    try:
+        client = paramiko.SSHClient()
+        print("Connected to unit for monitoring")
+        client.load_system_host_keys()
+        client.connect('192.168.0.45', username='pi', password='raspberry')
+
+        #stdin, stdout, stderr = client.exec_command('python getWeight.py')
+        client.exec_command(commandString)
+
+        return ("Great, the unit has been set up successfully")
+
+    except:
+        return ("Error connecting to the unit for monitoring")
+
+
 
 # Check and Register Product Page
 def registerProduct(request):
@@ -128,15 +159,33 @@ def setUpDevice(request):
 #Starts monitoring process and passes arguements to the pi
 class startMonitoringProcess(generics.RetrieveAPIView):
     def get(self, request):
+
+        print("Received request")
+
+
         barcode1 = request.query_params.get('barcode1')
         barcode2 = request.query_params.get('barcode2')
         barcode3 = request.query_params.get('barcode3')
         barcode4 = request.query_params.get('barcode4')
         barcode5 = request.query_params.get('barcode5')
-        print("Barcodes received are: ", barcode1, barcode2, barcode3, barcode4, barcode5)
-        success_data = "Great, the unit is up and running..."
+        location = request.query_params.get('location')
+        barcodes = []
+        weights = []
+        barcodesToSend = []
+        barcodes.extend([barcode1, barcode2, barcode3, barcode4, barcode5])
+
+        for barcode in barcodes:
+            if len(barcode) > 1:
+                barcodesToSend.append(barcode)
+                print("Checking for :", barcode)
+                weight = Product.objects.get(barcode=barcode)
+                weights.append(weight.weightGrams)
+
+
+        responseFromPi = startUnit(barcodesToSend, weights, location)
+        
         #error_data = "Error, issue with connecting to unit..."
-        return Response(success_data, status=status.HTTP_503_SERVICE_UNAVAILABLE)
+        return Response(responseFromPi)
 
 
 
