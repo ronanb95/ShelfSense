@@ -470,3 +470,7 @@ img {
         transform: scale(0);
     }
 }
+
+body{
+    font-family: 'Roboto', sans-serif;;
+}
