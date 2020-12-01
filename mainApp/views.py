@@ -28,6 +28,10 @@ from .forms import LoginForm, SignUpForm
 
 #Basic homepage render
 def home(request):
+    #if user not logged in:
+        #return render(request, "mainApp/index.html")
+
+    #else:
     return render(request, "mainApp/datatable.html")
 
 #Function connects to PI and gets Weigth reading to register product
