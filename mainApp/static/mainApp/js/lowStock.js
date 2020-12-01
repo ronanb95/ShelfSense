@@ -30,7 +30,7 @@ $(function () {
                 "                                                    <td class=\"buy\">Location</td>\n" +
                 "                                                    <td class=\"sell\">Current Stock</td>\n" +
                 "                                                    <td class=\"trends\">Low Stock Level</td>\n" +
-                "                                                    <td class=\"attachments\">    Trends of Stock</td>\n" +
+                "                                                    <td class=\"attachments\">    Store</td>\n" +
                 "                                                </tr>";
             var barcode = "";
             for (var i = 0; i < dataJson.length; i++) {
@@ -41,19 +41,22 @@ $(function () {
                     content += " <tr>\n" + "      <td>";
                 content += dataJson[i]["barcode"];
                 content += "</td>\n" + "      <td>";
-                content += dataJson[i]["brand"];
+                content += dataJson[i]["barcode__brand"];
                 content += "</td>\n" + "      <td>";
-                content += dataJson[i]["productName"];
+                content += dataJson[i]["barcode__productName"];
                 content += "</td>\n" + "      <td>";
-                content += dataJson[i]["stockcontrol__location"];
+                content += dataJson[i]["location"];
                 content += "</td>\n" + "      <td>";
-                content += dataJson[i]["stockcontrol__quantity"];
+                content += dataJson[i]["quantity"];
 
 
                 content += "</td>\n" + "<td>";
 
-                content += dataJson[i]["lowStockLevel"];
-                content += "</td>\n" + "<td class=\"trends\"><img src=" +icon+" alt=\"icon\"></td>";
+                content += dataJson[i]["barcode__lowStockLevel"];
+                // content += "</td>\n" + "<td class=\"trends\"><img src=" +icon+" alt=\"icon\"></td>";
+                content += "</td>\n" + "      <td>";
+                content += dataJson[i]["location__store"];
+                content += "</td>"
                 }
 
                 // content += "</td>";

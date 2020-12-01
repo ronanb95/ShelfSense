@@ -1,16 +1,21 @@
-(document).ready(function () {
-    var index = [];
+$(document).ready(function() {
     var t = $('#dataTable2').DataTable();
-    fetch("http://127.0.0.1:8000/default").then(response => {
-        return response.json();
-    }).then(data => {
-        data.forEach(function (code) {
-            if (!~index.indexOf(code['barcode'])) {
-                t.row.add([code['brand'], code['productName'], code['stockcontrol__location'], code['barcode'], code['stockcontrol__quantity']]).draw(false);
-            }
-            index.push(code['barcode']);
-        })
-    })
-});
+    var counter = 1;
+    fetch("http://localhost:8000/default")
+	.then(response => {
+	  return response.json();
+	})
+	.then(data => {
+	  data.forEach(function(code){
+	    t.row.add( [
+	    	code['barcode'],
+	    	code['productName'],
+	    	code['brand'],
+	    	code['stockcontrol__location'],
+	    	code['stockcontrol__quantity']
+	    ] ).draw( false );
+	  })
+	})
+} );
 
 

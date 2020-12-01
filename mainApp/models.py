@@ -14,7 +14,7 @@ class Unit(models.Model):
 class Location(models.Model):
 	locationID = models.CharField(max_length=100, primary_key=True)
 	unit = models.OneToOneField(Unit, on_delete=models.SET_NULL, null=True)
-
+	store = models.CharField(max_length=45, blank=True, null=True)
 	def __str__(self):
 		return("Location " + self.locationID)
 

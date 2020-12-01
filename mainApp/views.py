@@ -18,7 +18,7 @@ from django.http import HttpResponse, JsonResponse
 from django.forms.models import model_to_dict
 from rest_framework import status
 from rest_framework.response import Response
-from django.db.models import F, Count
+from django.db.models import F, Count, Max
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
@@ -329,10 +329,14 @@ def lowStockLevel(request):
     #     barcode_count=Count('barcode')
     # ).filter(barcode_count=1)
     # info = Product.objects.filter(lowStockLevel__gte=F('stockcontrol__quantity')).order_by('barcode').values('barcode').distinct().values('barcode','productName','brand','stockcontrol__location','lowStockLevel','stockcontrol__quantity')
-    info = Product.objects.filter(lowStockLevel__gte=F('stockcontrol__quantity')).values('barcode','productName','brand','stockcontrol__location','lowStockLevel','stockcontrol__quantity').order_by('barcode','-stockcontrol__timeAdded')
-    print(info)
-    response = json.dumps(list(info))
-    return HttpResponse(response)
+    # info = Product.objects.filter(lowStockLevel__gte=F('stockcontrol__quantity')).values('barcode','productName','brand','stockcontrol__location','lowStockLevel','stockcontrol__quantity').order_by('barcode','-stockcontrol__timeAdded')
+
+    info = Product.objects.annotate(most_recent=Max('stockcontrol__timeAdded'))
+    info1 = StockControl.objects.filter(timeAdded__in=[s.most_recent for s in info]).filter(barcode__lowStockLevel__gte=F('quantity')).values('barcode','location','barcode__productName','barcode__brand','barcode__lowStockLevel','quantity','location__store')
+    # print(info)
+    print(info1)
+    response = json.dumps(list(info1))
+    return HttpResponse(info1)
 
 
 def login_view(request):
