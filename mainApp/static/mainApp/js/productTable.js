@@ -6,15 +6,21 @@ $(document).ready(function() {
 	  return response.json();
 	})
 	.then(data => {
+		unseenProducts = []
 	  data.forEach(function(code){
-	    t.row.add( [
-	    	code['barcode'],
-	    	code['productName'],
-	    	code['brand'],
-	    	code['stockcontrol__location'],
-	    	code['stockcontrol__quantity']
-	    ] ).draw( false );
+	  	if(unseenProducts.includes(code['barcode']) == false){
+	  		unseenProducts.push(code['barcode'])
+	  		t.row.add([code['brand'], code['productName'], code['stockcontrol__location'], code['barcode'],code['stockcontrol__quantity']]).draw(false);
+	  	}
+	    // t.row.add( [
+	    // 	code['brand'],
+	    // 	code['productName'],
+	    // 	code['stockcontrol__location'],
+	    // 	code['barcode'],
+	    // 	code['stockcontrol__quantity']
+	    // ] ).draw( false );
 	  })
+	  console.log(unseenProducts)
 	})
 } );
 
