@@ -340,7 +340,7 @@ def lowStockLevel(request):
     # print(info)
     print(info1)
     response = json.dumps(list(info1))
-    return HttpResponse(info1)
+    return HttpResponse(response)
 
 
 def login_view(request):
