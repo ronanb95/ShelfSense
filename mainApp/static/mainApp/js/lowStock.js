@@ -18,7 +18,7 @@ $(function () {
         url: '/lowLevelStock/',
 
         success: function (data) {
-            console.log(data);
+            // console.log(data);
             var dataJson = $.parseJSON(data);
             var content = "";
             var icon = trendDownIcon;
