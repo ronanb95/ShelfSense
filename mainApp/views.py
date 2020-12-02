@@ -34,6 +34,10 @@ def home(request):
     #else:
     return render(request, "mainApp/datatable.html")
 
+def landing(request):
+
+    return render(request, "mainApp/index.html")
+
 #Function connects to PI and gets Weigth reading to register product
 def getWeight():
     try:

@@ -12,15 +12,7 @@ $(document).ready(function() {
 	  		unseenProducts.push(code['barcode'])
 	  		t.row.add([code['brand'], code['productName'], code['stockcontrol__location'], code['barcode'],code['stockcontrol__quantity']]).draw(false);
 	  	}
-	    // t.row.add( [
-	    // 	code['brand'],
-	    // 	code['productName'],
-	    // 	code['stockcontrol__location'],
-	    // 	code['barcode'],
-	    // 	code['stockcontrol__quantity']
-	    // ] ).draw( false );
 	  })
-	  console.log(unseenProducts)
 	})
 } );
 
