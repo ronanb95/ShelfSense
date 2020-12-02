@@ -2836,4 +2836,11 @@ table.dataTable thead td {
     color: #555;
 }
 
+.hello-msg {
+    font-weight:bold;
+    color: #fff;
+    margin-right: 10px;
+}
+
+
 /*-------------------- END Offset Sidebar ------------------- */

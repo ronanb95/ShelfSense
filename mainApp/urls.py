@@ -16,6 +16,7 @@ urlpatterns = [
     path('login/', views.login_view, name="login"),
     path('register/', views.register_user, name="register"),
     path('user/', views.user_page, name="user"),
+    path('logout/', views.logout_user, name="logout"),
 
     # Start monitor form
     path('startMonitoringProcess/', views.startMonitoringProcess.as_view(), name="startMonitoringProcess")

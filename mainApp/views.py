@@ -20,7 +20,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from django.db.models import F, Count, Max
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.forms.utils import ErrorList
 from django.http import HttpResponse
@@ -393,5 +393,10 @@ def user_page(request):
 
 
     return render(request, "mainApp/page_user.html")
+
+def logout_user(request):
+    logout(request)
+    return redirect('login')
+
 
 
