@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 {% block content %}
 	
-	<h1>Register a Product</h1>
+	<!-- <h3 class="registerProduct">Register a Product</h3> -->
 
 	{% if messages %}
     	{% for message in messages %}
@@ -13,22 +13,22 @@
   	{% endif %}
 
   	{% if check_form %}
-		<div class="content-section">
+		<div class="content-section checkBarcode">
 			<form method="POST">
 				{% csrf_token %}
 				<fieldset class="form-group">
-					<legend class="border-bottom mb-4">Check if product is in database</legend>
+					<legend class="border-bottom mb-4">Check if product is already registered</legend>
 					{{ check_form | crispy }}
 				</fieldset>
-				<div class="form-group">
-	                <button class="btn btn-outline-info" type="submit" name="barcode_check">Check Barcode</button>
+				<div class="form-group barcodebtncont">
+	                <button class="barcodebtn" type="submit" name="barcode_check">Check Barcode</button>
 	            </div>
 			</form>
 		</div>
 	{% endif %}
 
   	{% if form %}
-		<div class="content-section">
+		<div class="content-section checkBarcode2">
 			<form method="POST">
 				{% csrf_token %}
 				<fieldset class="form-group">
@@ -36,8 +36,9 @@
 					{{ form|crispy }}
 					<!-- <button type="submit" name="run_script">Run script</button> -->
 				</fieldset>
-				<div class="form-group">
-	                <button class="btn btn-outline-info" type="submit" name="run_script">Get Product Weight</button>
+				<div class="form-group barcodebtncont">
+					<p class="btnnotice"> Press the button below, wait 5 seconds and place product on the unit until notice to remove appears </p>
+	                <button class="registerbtn" type="submit" name="run_script">Get Product Weight</button>
 	            </div>
 			</form>
 		</div>

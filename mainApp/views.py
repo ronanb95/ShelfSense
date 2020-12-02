@@ -32,7 +32,9 @@ def home(request):
         #return render(request, "mainApp/index.html")
 
     #else:
-    return render(request, "mainApp/datatable.html")
+    heading = "Dashboard"
+    context = {"heading":heading}
+    return render(request, "mainApp/datatable.html", context)
 
 def landing(request):
 
@@ -96,6 +98,8 @@ def startUnit(barcodes, weights, location):
 
 # Check and Register Product Page
 def registerProduct(request):
+    #Heading used for nav bar
+    heading = 'Register Product'
 
     #### Barcoode checking form
     if request.method == 'POST' and 'barcode_check' in request.POST:
@@ -103,7 +107,7 @@ def registerProduct(request):
         if form.is_valid():
             messages.warning(request, 'Product was not found, please add now')
             register_form = RegisterProductForm()
-            context = {'form':register_form}
+            context = {'form':register_form, 'heading':heading}
             return render(request,'mainApp/register_product.html',context)
         else:
             scannedBarcode = form.data['barcode']
@@ -136,8 +140,10 @@ def registerProduct(request):
                 newProduct.save()
                 messages.success(request, f'Successfully created product {brand} {productName}')
                 barcode_form = ProductBarcodeForm()
+                heading = 'Register Product'
                 context = {
                     'check_form':barcode_form,
+                    'heading' : heading
                    # 'form':register_form
                 }
                 return render(request, 'mainApp/register_product.html', context)
@@ -155,6 +161,7 @@ def registerProduct(request):
         barcode_form = ProductBarcodeForm()
         context = {
             'check_form':barcode_form,
+            'heading': heading
         }
         return render(request, 'mainApp/register_product.html', context)
 
@@ -162,7 +169,7 @@ def setUpDevice(request):
 	if request.method == "POST":
 		pass
 	else:
-		return render(request, 'mainApp/startMonitor.html')
+		return render(request, 'mainApp/startMonitor.html', context={'heading': "Set Up Unit"})
 
 #Starts monitoring process and passes arguements to the pi
 class startMonitoringProcess(generics.RetrieveAPIView):
@@ -360,7 +367,7 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect("/")
+                return redirect("/home")
             else:
                 msg = 'Invalid credentials'
         else:
@@ -400,7 +407,7 @@ def user_page(request):
 
 def logout_user(request):
     logout(request)
-    return redirect('login')
+    return redirect('landing')
 
 
 
