@@ -1,74 +1,98 @@
-{% extends "mainApp/base.html" %}
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="en">
 
-{% block title %} Login {% endblock %} 
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>ShelfSense - Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="assets/images/icon/favicon.ico">
+    <link rel="stylesheet" href="{% static 'mainApp/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'mainApp/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'mainApp/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'mainApp/metisMenu.css' %}">
+    <link rel="stylesheet" href="{% static 'mainApp/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'mainApp/slicknav.min.css' %}">
+    <!-- amchart css -->
+    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+    <!-- others css -->
+    <link rel="stylesheet" href="{% static 'mainApp/typography.css' %}">
+    <link rel="stylesheet" href="{% static 'mainApp/default-css.css' %}">
+    <link rel="stylesheet" href="{% static 'mainApp/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'mainApp/responsive.css' %}">
+    <!-- modernizr css -->
+    <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="icon" href="{% static 'mainApp/images/icon/tab.png' %}">
+</head>
 
-<!-- Specific Page CSS goes HERE  -->
-{% block stylesheets %}{% endblock stylesheets %}
-
-{% block content %}
-
-        <div class="row">
-          <div class="col-md-8">
-            <div class="card">
-
-              <form role="form" method="post" action="">
-              
-                {% csrf_token %} 
-
-                <div class="card-header">
-                  <h5 class="title">Login</h5>
-
-                  <h6 class="card-category">
-                      {% if msg %}
-                        <span class="text-danger">{{ msg }}</span>
-                      {% else %}
-
-                        Use default credentials: test / ApS12_ZZs8
-                        <br />
-                        OR <a href={% url 'register' %} >create your own user</a>
-
-                      {% endif %}  
-                  </h6>
-                </div>
-
-                <div class="card-body">
-
-                    <div class="row">
-
-                      <div class="col-md-3 px-md-1">
-                        <div class="form-group">
-                          <label>Username</label>
-                          {{ form.username }}
-                        </div>
-                      </div>
-
+<body>
+    {% if message %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endif %}
+    <div class="login-area">
+        <div class="container">
+            <div class="login-box ptb--100">
+                <form role="form" method="post" action="">
+                    {% csrf_token %}
+                    <div class="login-form-head">
+                        <h4>Sign In</h4>
+                        <p>Hey there, sign in here to get some awesome analytics</p>
                     </div>
-                    <div class="row">
-
-                      <div class="col-md-3 px-md-1">
-                        <div class="form-group">
-                          <label>Password</label>
-                          {{ form.password }}
+                    <div class="login-form-body">
+                        <div class="form-gp">
+                            {% if msg %}
+                            <span class="text-danger">{{ msg }}</span>
+                            {% endif %}
+                            <p>Username <i class="fa fa-user" aria-hidden="true"></i></p>
+                            {{ form.username }}
                         </div>
-                      </div>
-
+                        <div class="form-gp">
+                            <p>Password <i class="fa fa-lock" aria-hidden="true"></i></p>
+                            {{ form.password }}
+                            <div class="text-danger"></div>
+                        </div>
+                        <div class="row mb-4 rmber-area">
+                            <div class="col-6">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+                                    <label class="custom-control-label" for="customControlAutosizing">Remember Me</label>
+                                </div>
+                            </div>
+                            <div class="col-6 text-right">
+                                <a href="#">Forgot Password?</a>
+                            </div>
+                        </div>
+                        <div class="submit-btn-area">
+                            <button type="submit" name="login">Submit <i class="fa fa-arrow-right"></i></button>
+                        </div>
+                        <div class="form-footer text-center mt-5">
+                            <p class="text-muted">Don't have an account? <a href="{% url 'register' %} ">Sign up</a></p>
+                        </div>
                     </div>
-                    
-                </div>
-                <div class="card-footer">
-                  <button type="submit" name="login" class="btn btn-fill btn-primary">Login</button>
-                  &nbsp; &nbsp;
-                  Don't have an account? <a href="{% url 'register' %}" class="text-primary">Create</a>
-                </div>
-
-              </form>
-
+                </form>
             </div>
-          </div>
-      </div>
+        </div>
+    </div>
+    <!-- login area end -->
 
+    <!-- jquery latest version -->
+    <script src="assets/js/vendor/jquery-2.2.4.min.js"></script>
+    <!-- bootstrap 4 js -->
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="assets/js/metisMenu.min.js"></script>
+    <script src="assets/js/jquery.slimscroll.min.js"></script>
+    <script src="assets/js/jquery.slicknav.min.js"></script>
+    
+    <!-- others plugins -->
+    <script src="assets/js/plugins.js"></script>
+    <script src="assets/js/scripts.js"></script>
+</body>
 
-{% endblock content %}
+</html>
 
-<!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
