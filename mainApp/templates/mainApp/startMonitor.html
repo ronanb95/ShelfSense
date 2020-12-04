@@ -1,25 +1,27 @@
 {% extends "mainApp/base.html" %}
 {% block content %}
 
-<h1> Follow the instructions below to begin monitoring products </h1>
 
 <div class="form-style-8" id="innerMessage">
+	<h3 class="formTitle"> Follow the instructions below to begin monitoring products </h3>
 	<form id="monitorForm">
 		<p class="notRecognized" id="locerror"> Sorry, this location was not recognized. Please ensure the location code was entered correctly </p>
 		<input type="text" name="field1" placeholder="Scan the Location Code..." id="locationCode"/>
-		<p class="notRecognized" id="error1"> Sorry, this barcode was not recognized. Please register the product <a href="localhost:8000//register_product/"> here </a> before attempting to monitor it or enter a different barcode. </p>
+		<p class="notRecognized" id="error1"> Sorry, this barcode was not recognized. Please register the product <a href="localhost:8000/register_product/"> here </a> before attempting to monitor it or enter a different barcode. </p>
 	    <input type="text" name="field2" placeholder="Scan First Product Barcode..." id="barcode1"/>
-	    <p class="notRecognized" id="error2"> Sorry, this barcode was not recognized. Please register the product <a href="localhost:8000//register_product/"> here </a> before attempting to monitor it. </p>
+	    <p class="notRecognized" id="error2"> Sorry, this barcode was not recognized. Please register the product <a href="localhost:8000/register_product/"> here </a> before attempting to monitor it. </p>
 	    <input type="text" name="field3" placeholder="Scan Second Product Barcode (Leave Blank if Finished)..." id="barcode2"/>
-	    <p class="notRecognized" id="error3"> Sorry, this barcode was not recognized. Please register the product <a href="localhost:8000//register_product/"> here </a> before attempting to monitor it. </p>
+	    <p class="notRecognized" id="error3"> Sorry, this barcode was not recognized. Please register the product <a href="localhost:8000/register_product/"> here </a> before attempting to monitor it. </p>
 	    <input type="text" name="field4" placeholder="Scan Third Product Barcode (Leave Blank if Finished)..." id="barcode3"/>
-	    <p class="notRecognized" id="error4"> Sorry, this barcode was not recognized. Please register the product <a href="localhost:8000//register_product/"> here </a> before attempting to monitor it. </p>
+	    <p class="notRecognized" id="error4"> Sorry, this barcode was not recognized. Please register the product <a href="localhost:8000/register_product/"> here </a> before attempting to monitor it. </p>
 	    <input type="text" name="field5" placeholder="Scan Fourth Product Barcode (Leave Blank if Finished)..." id="barcode4"/>
-	    <p class="notRecognized" id="error5"> Sorry, this barcode was not recognized. Please register the product <a href="localhost:8000//register_product/"> here </a> before attempting to monitor it. </p>
+	    <p class="notRecognized" id="error5"> Sorry, this barcode was not recognized. Please register the product <a href="localhost:8000/register_product/"> here </a> before attempting to monitor it. </p>
 	    <input type="text" name="field6" placeholder="Scan Fifth Product Barcode (Leave Blank if Finished)..." id="barcode5"/>
 	</form>
-		<input type="button" value="Start Monitoring" id="startbtn"/>
-		<input type="button" value="Add More Products" id="addbtn"/>
+	<div class = "buttonContainer">
+		<input type="button" value="Start Monitoring" id="startbtn" class="innerbtn"/>
+		<input type="button" value="Add More Products" id="addbtn" class="innerbtn btn-outline-sm"/>
+	</div>
 </div>
 
 {% endblock content %}

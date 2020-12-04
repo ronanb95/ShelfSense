@@ -47,17 +47,14 @@
     <script src="{% static 'mainApp/js/user.js' %}"></script>
 
 
-
-    {% if title %}
-        <title>Shelf Sense - {{ title }}</title>
+    <link rel="icon" href="{% static 'mainApp/images/icon/tab.png' %}">
+    {% if heading %}
+        <title>ShelfSense - {{ heading }}</title>
     {% else %}
-        <title>Shelf Sense</title>
+        <title>ShelfSense</title>
     {% endif %}
 </head>
 <body>
-
-
-
 
 
 <div id="preloader">
@@ -70,14 +67,14 @@
         <div class="sidebar-menu">
             <div class="sidebar-header">
                 <div class="logo">
-                    <a href="index.html"><img src="{% static 'mainApp/images/icon/logo.png' %}" alt="logo"></a>
+                    <h3 class="logoh"> ShelfSense </h3>
                 </div>
             </div>
             <div class="main-menu">
                 <div class="menu-inner">
                     <nav>
                         <ul class="metismenu" id="menu">
-                            <li class="active"><a href="{% url 'home' %}"><i class="fas fa-table"></i><span>Dashboard</span></a></li>
+                            <li><a href="{% url 'home' %}"><i class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
                             <li>
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-table"></i>
                                     <span>Set Up</span></a>
@@ -113,22 +110,27 @@
                 <div class="row align-items-center">
                     <div class="col-sm-6">
                         <div class="breadcrumbs-area clearfix">
-                            <h4 class="page-title pull-left">Dashboard</h4>
-                            <ul class="breadcrumbs pull-left">
+                            {% if heading %}
+                            <h4 class="page-title pull-left">{{ heading }}</h4>
+                            {% else %}
+                            <h4 class="page-title pull-left">ShelfSense</h4>
+                            {% endif %}
+
+                            <!-- <ul class="breadcrumbs pull-left">
                                 <li><a href="index.html">Home</a></li>
                                 <li><span>Datatable</span></li>
-                            </ul>
+                            </ul> -->
                         </div>
                     </div>
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
-                           <a href="/user"><img class="avatar user-thumb" src="{% static 'mainApp/images/author/avatar.png' %}" alt="avatar" id ="user"></a>
+                           <img class="avatar user-thumb" src="{% static 'mainApp/images/author/avatar.png' %}" alt="avatar" id ="user">
                            <!-- <h4 class="user-name dropdown-toggle" data-toggle="dropdown"><i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#">Log Out</a>
                             </div> -->
-                            <span class = "hello-msg">HELLO, {{request.user}}</span>
-                            <span><a href="/logout">Log Out</a></span>
+                            <span class="hello-msg">Hello, {{request.user}}</span>
+                            <span><a href="/logout" class="logout">Log Out</a></span>
                         </div>
                     </div>
                 </div>

@@ -2844,3 +2844,39 @@ table.dataTable thead td {
 
 
 /*-------------------- END Offset Sidebar ------------------- */
+
+.formTitle{
+    margin-bottom: 20px;
+}
+
+.form-style-8{
+    width: 80%;
+}
+
+.notRecognized{
+    font-size: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+/*.buttonContainer{
+    display: inline-block;
+}*/
+
+#addbtn, #startbtn{
+    margin-top: 20px;
+}
+
+.loginPage{
+    background-color: #5F4DEE;
+}
+
+.logout{
+    color: black;
+    font-weight: bold;
+}
+
+.hello-msg{
+    font-weight: bold;
+    font-size: 120%;
+}

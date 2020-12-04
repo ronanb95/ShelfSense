@@ -136,7 +136,7 @@ a.article-title:hover {
   resize:none;
   overflow: hidden;
 }
-.form-style-8 input[type="button"], 
+/*.form-style-8 input[type="button"], 
 .form-style-8 input[type="submit"]{
   -moz-box-shadow: inset 0px 1px 0px 0px #45D6D6;
   -webkit-box-shadow: inset 0px 1px 0px 0px #45D6D6;
@@ -156,14 +156,122 @@ a.article-title:hover {
 .form-style-8 input[type="submit"]:hover {
   background:linear-gradient(to bottom, #34CACA 5%, #30C9C9 100%);
   background-color:#34CACA;
-}
+}*/
 
 #barcode1, #barcode2, #barcode3, #barcode4, #barcode5, #startbtn, #addbtn{
   display: none;
 }
 
-.notRecognized{
-  font-size:15px;
-  color: red;
-  display: none;
+
+.formTitle{
+    margin-bottom: 20px;
 }
+
+.form-style-8{
+    width: 80%;
+}
+
+.notRecognized{
+    display: none;
+    font-size: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: red;
+}
+
+.buttonContainer{
+    text-align: center;
+}
+
+#addbtn, #startbtn{
+    margin-top: 20px;
+   /* position: absolute;*/
+    top: 50%;
+    left: 50%;
+
+}
+
+#addbtn{
+  padding: 1.375rem 2.625rem 1.375rem 2.625rem;
+  border: 0.125rem solid #303641;
+  border-radius: 2rem;
+  background-color: #303641;
+  color: #fff;
+  font: 700 0.875rem/0 "Open Sans", sans-serif;
+  text-decoration: none;
+  transition: all 0.2s;
+  margin-left: 20px;
+}
+
+#addbtn:hover{
+  background-color: transparent;
+  color: #5f4dee;
+  text-decoration: none;
+}
+
+#startbtn{
+  padding: 1.375rem 2.625rem 1.375rem 2.625rem;
+  border: 0.125rem solid #5f4dee;
+  border-radius: 2rem;
+  background-color: #5f4dee;
+  color: #fff;
+  font: 700 0.875rem/0 "Open Sans", sans-serif;
+  text-decoration: none;
+  transition: all 0.2s;
+  margin-right:20px;
+}
+
+#startbtn:hover{
+  background-color: transparent;
+  color: #5f4dee;
+  text-decoration: none;
+}
+
+.registerProduct{
+  margin-top:10px;
+  margin-bottom: 10px;
+}
+
+.checkBarcode{
+  margin-top: 100px;
+  width: 80%;
+  margin-left: 10%;
+}
+
+.checkBarcode2{
+  margin-top: 30px;
+  width: 80%;
+  margin-left: 10%;
+}
+
+.barcodebtn, .registerbtn{
+  padding: 1.375rem 2.625rem 1.375rem 2.625rem;
+  border: 0.125rem solid #5f4dee;
+  border-radius: 2rem;
+  background-color: #5f4dee;
+  color: #fff;
+  font: 700 0.875rem/0 "Open Sans", sans-serif;
+  text-decoration: none;
+  transition: all 0.2s;
+  margin-right:20px;
+}
+
+.barcodebtncont{
+  text-align: center;
+}
+
+.btnnotice{
+  margin-top:5px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.alert-warning{
+  font-weight:bold;
+}
+
+.logoh{
+  font-weight: bold;
+  color:#fff;
+}
+

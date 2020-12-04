@@ -53,8 +53,8 @@ document.getElementById('locationCode').addEventListener('keyup', function(event
       if (locations.includes(entryLoc)){
         locerror.style.display = "none";
         document.getElementById('barcode1').style.display="block";
-        document.getElementById('startbtn').style.display="block";
-        document.getElementById('addbtn').style.display="block";
+        document.getElementById('startbtn').style.display="inline-block";
+        document.getElementById('addbtn').style.display="inline-block";
       } else {
         locerror.style.display = "block";
         document.getElementById('locationCode').value = ""
