@@ -2880,3 +2880,7 @@ table.dataTable thead td {
     font-weight: bold;
     font-size: 120%;
 }
+
+.centerMe{
+    text-align: center;
+}

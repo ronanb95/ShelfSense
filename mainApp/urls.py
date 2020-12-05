@@ -18,7 +18,10 @@ urlpatterns = [
     path('register/', views.register_user, name="register"),
     path('user/', views.user_page, name="user"),
     path('logout/', views.logout_user, name="logout"),
+    path('maintenance/', views.maintenance, name="maintenance"),
 
     # Start monitor form
-    path('startMonitoringProcess/', views.startMonitoringProcess.as_view(), name="startMonitoringProcess")
+    path('startMonitoringProcess/', views.startMonitoringProcess.as_view(), name="startMonitoringProcess"),
+    # Check pi is online
+    path('checkMaintenance/', views.startMaintenanceCheck.as_view(), name="startMaintenance")
 ]

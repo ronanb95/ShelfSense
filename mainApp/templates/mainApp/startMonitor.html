@@ -3,7 +3,7 @@
 
 
 <div class="form-style-8" id="innerMessage">
-	<h3 class="formTitle"> Follow the instructions below to begin monitoring products </h3>
+	<h3 class="formTitle" id="formHeader"> Follow the instructions below to begin monitoring products </h3>
 	<form id="monitorForm">
 		<p class="notRecognized" id="locerror"> Sorry, this location was not recognized. Please ensure the location code was entered correctly </p>
 		<input type="text" name="field1" placeholder="Scan the Location Code..." id="locationCode"/>
@@ -21,6 +21,7 @@
 	<div class = "buttonContainer">
 		<input type="button" value="Start Monitoring" id="startbtn" class="innerbtn"/>
 		<input type="button" value="Add More Products" id="addbtn" class="innerbtn btn-outline-sm"/>
+		<a href="{% url 'home' %}"><input type="button" value="Return to Dashboard" id="dashbtn" class="innerbtn btn-outline-sm"/></a>
 	</div>
 </div>
 

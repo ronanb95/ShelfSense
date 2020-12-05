@@ -142,9 +142,11 @@ document.getElementById('startbtn').addEventListener('click', function(event){
         return response.json()
       })
       .then(data =>{
-        monitorForm.innerHTML = "<h1>" + data + "</h1>";
+        document.getElementById('formHeader').style.display = 'none';
         addbtn.style.display = "none";
         startbtn.style.display = "none";
+        monitorForm.innerHTML = "<div class='centerMe'><h1 class='successTitle'>" + data + "</h1></div>";
+        document.getElementById('dashbtn').style.display = 'inline-block';
       })
     }
   }

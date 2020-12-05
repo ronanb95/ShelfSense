@@ -2836,3 +2836,6 @@ table.dataTable thead td {
 
 /*-------------------- END Offset Sidebar ------------------- */
 
+.reduceMargin{
+    margin-top: -250000px;
+}

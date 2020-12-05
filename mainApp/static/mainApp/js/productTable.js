@@ -1,8 +1,8 @@
 $(document).ready(function() {
     var t = $('#dataTable2').DataTable();
     var counter = 1;
-    //fetch("http://localhost:8000/default")
-    fetch("http://127.0.0.1:8000/default")
+    fetch("http://localhost:8000/default")
+    //fetch("http://127.0.0.1:8000/default")
    .then(response => {
      return response.json();
    })

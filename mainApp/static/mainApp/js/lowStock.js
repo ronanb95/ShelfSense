@@ -23,7 +23,6 @@ $(function () {
             var dataJson = $.parseJSON(data);
             var content = "";
             var icon = trendDownIcon;
-            console.log("hiiii");
             content += "<tr class=\"heading-td\">\n" +
                 "                                                    <td class=\"mv-icon\" style='text-align:center'>Barcode</td>\n" +
                 "                                                    <td class=\"mv-icon\" style='text-align:center'>Brand Name</td>\n" +
@@ -68,7 +67,7 @@ $(function () {
 
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
-            alert("Something Wrong!");
+            console.log("Something Wrong!");
         },
     });
 });

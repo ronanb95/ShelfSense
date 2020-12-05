@@ -36,8 +36,18 @@ def home(request):
 
     # else:
     heading = "Dashboard"
-    context = {"heading": heading}
+    context = {"heading": heading, "dashb":True}
     return render(request, "mainApp/datatable.html", context)
+
+@login_required(login_url='landing')
+def maintenance(request):
+    # if user not logged in:
+    # return render(request, "mainApp/index.html")
+
+    # else:
+    heading = "Maintenance"
+    context = {"heading": heading, "maint":True}
+    return render(request, "mainApp/maintenance.html", context)
 
 
 def landing(request):
@@ -114,7 +124,7 @@ def registerProduct(request):
         if form.is_valid():
             messages.warning(request, 'Product was not found, please add now')
             register_form = RegisterProductForm()
-            context = {'form': register_form, 'heading': heading}
+            context = {'form': register_form, 'heading': heading, 'productReg':True, 'dropdown':True}
             return render(request, 'mainApp/register_product.html', context)
         else:
             scannedBarcode = form.data['barcode']
@@ -151,7 +161,9 @@ def registerProduct(request):
                 heading = 'Register Product'
                 context = {
                     'check_form': barcode_form,
-                    'heading': heading
+                    'heading': heading,
+                    'productReg': True,
+                    'dropdown': True
                     # 'form':register_form
                 }
                 return render(request, 'mainApp/register_product.html', context)
@@ -169,7 +181,9 @@ def registerProduct(request):
         barcode_form = ProductBarcodeForm()
         context = {
             'check_form': barcode_form,
-            'heading': heading
+            'heading': heading,
+            'productReg':True,
+            'dropdown':True
         }
         return render(request, 'mainApp/register_product.html', context)
 
@@ -179,7 +193,7 @@ def setUpDevice(request):
     if request.method == "POST":
         pass
     else:
-        return render(request, 'mainApp/startMonitor.html', context={'heading': "Set Up Unit"})
+        return render(request, 'mainApp/startMonitor.html', context={'heading': "Set Up Unit", 'dropdown':True, 'setup':True})
 
 
 # Starts monitoring process and passes arguements to the pi
@@ -211,13 +225,30 @@ class startMonitoringProcess(generics.RetrieveAPIView):
         # error_data = "Error, issue with connecting to unit..."
         return Response(responseFromPi)
 
+class startMaintenanceCheck(generics.RetrieveAPIView):
+    def get(self, request):
 
-# def get(self, request):
-#        barcode2 = request.query_params.get('barcode2')
-#  barcode1 = request.query_params.get('barcode1')
-#  print("Barcode1 from form is: ", barcode1, barcode2, barcode3, barcode4, barcode5)
-#  error_data = "ERROR, problem with Real Time API"
-#  return Response(error_data, status=status.HTTP_503_SERVICE_UNAVAILABLE)
+        print("Received maintenance request")
+
+        ##Would just fetch ips of all units and do a loop
+            ##Will only have one running for now so just input details
+        try:
+            client = paramiko.SSHClient()
+            print("Connected to unit for monitoring")
+            client.load_system_host_keys()
+            client.connect('192.168.0.45', username='pi', password='raspberry')
+
+            response = 1
+
+        except:
+            response = 0
+
+        
+
+        # error_data = "Error, issue with connecting to unit..."
+        return Response(response)
+
+
 
 
 def displayEntireStore(request):
@@ -319,7 +350,7 @@ def selectByTime(request):
     :return: the last 10 records
     """
     # info = StockControl.objects.all().order_by('timeAdded')
-    info = Product.objects.all().select_related('stockcontrol').order_by('-stockcontrol__timeAdded')[:10].values(
+    info = Product.objects.all().select_related('stockcontrol').order_by('-stockcontrol__timeAdded')[:1000].values(
         'barcode', 'productName', 'brand', 'stockcontrol__location', 'stockcontrol__quantity')
 
     # tmpJson = serializers.serialize("json", info)

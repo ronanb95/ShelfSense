@@ -17,8 +17,8 @@ class RegisterProductForm(forms.ModelForm):
 	Unit_barcode = forms.CharField(label="Scan barcode of unit")
 
 	barcode = forms.CharField(label="Product barcode")
-	brand = forms.CharField(label="Barnd")
-	productName = forms.CharField(max_length=100, label="Full product type")
+	brand = forms.CharField(label="Brand Name")
+	productName = forms.CharField(max_length=100, label="Full Product Name")
 	unitSize = forms.CharField(max_length=100, label="Unit Size")
 	lowStockLevel = forms.IntegerField(required=False, label="Low Stock Level (Only enter if known)")
 	#weightGrams = models.IntegerField()

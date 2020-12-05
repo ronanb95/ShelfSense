@@ -74,15 +74,36 @@
                 <div class="menu-inner">
                     <nav>
                         <ul class="metismenu" id="menu">
+                            {% if dashb %}
+                            <li class="active"><a href="{% url 'home' %}"><i class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
+                            {% else %}
                             <li><a href="{% url 'home' %}"><i class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
+                            {% endif %}
+                            {% if dropdown %}
+                            <li class="active">
+                            {% else %}
                             <li>
+                            {% endif %}
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-table"></i>
                                     <span>Set Up</span></a>
                                 <ul class="collapse">
+                                    {% if productReg %}
+                                    <li class="active"><a href="{% url 'register_product' %}">Product Registration</a></li>
+                                    {% else %}
                                     <li><a href="{% url 'register_product' %}">Product Registration</a></li>
+                                    {% endif %}
+                                    {% if setup %}
+                                    <li class="active"><a href="{% url 'setupdevice' %}">Unit Set Up</a></li>
+                                    {% else %}
                                     <li><a href="{% url 'setupdevice' %}">Unit Set Up</a></li>
+                                    {% endif %}
                                 </ul>
                             </li>
+                            {% if maint %}
+                            <li class="active"><a href="{% url 'maintenance' %}"><i class="fa fa-wrench"></i><span>Maintenance</span></a></li>
+                            {% else %}
+                            <li><a href="{% url 'maintenance' %}"><i class="fa fa-wrench"></i><span>Maintenance</span></a></li>
+                            {% endif %}
                         </ul>
                     </nav>
                 </div>
@@ -179,6 +200,8 @@
 <!-- others plugins -->
 <script src="{% static 'mainApp/js/plugins.js' %}"></script>
 <script src="{% static 'mainApp/js/scripts.js' %}"></script>
+<script src="{% static 'mainApp/js/productRegister.js' %}"></script>
+<script src="{% static 'mainApp/js/maintenance.js' %}"></script>
 </body>
 </html>
 

@@ -5,18 +5,40 @@
 {% load static %}
 <script>
     var trendDownIcon = "{% static "mainApp/images/icon/market-value/trends-down-icon.png" %}";
-    console.log("aa");
-    console.log(trendDownIcon);
 </script>
 
 <!-- page title area end -->
 <div class="main-content-inner">
     <div class="row">
+
+        <!-- Low Stock Section Start -->
+        <div class="row mt-5 mb-5 col-lg-12">
+            <div class="col-12 lowStockArea">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-sm-flex justify-content-between align-items-center">
+                            <h4 class="header-title mb-0" >Currently Low Stock Levels</h4>
+                        </div>
+                        <div class="market-status-table mt-4" >
+                            <div class="table-responsive" >
+                                <table class="dbkit-table" id="lowStock">
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Low Stock Section End -->
+
+
+
         <!-- Primary table start -->
         <div class="col-12 mt-5">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title">Data Table Primary</h4>
+                    <h4 class="header-title">General Stock Levels</h4>
                     <div class="data-tables datatable-primary">
                         <table id="dataTable2" class="text-center">
                             <thead class="text-capitalize">
@@ -37,18 +59,59 @@
             </div>
         </div>
         <!-- Primary table end -->
-        
-        <!-- Low Stock Section Start -->
+
+
+        <!-- Conversion Rate Section Start -->
         <div class="row mt-5 mb-5 col-lg-12">
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-sm-flex justify-content-between align-items-center">
-                            <h4 class="header-title mb-0" >Currently Low Stock Levels</h4>
+                            <h4 class="header-title mb-0" >Sales Conversion Rate</h4>
                         </div>
                         <div class="market-status-table mt-4" >
                             <div class="table-responsive" >
-                                <table class="dbkit-table" id="lowStock">
+                                <table class="dbkit-table" id="conversionRates">
+                                    <tr class="heading-td">
+                                        <td class="mv-icon">Brand Name</td>
+                                        <td class="coin-name">Product Name</td>
+                                        <td class="buy">Store</td>
+                                        <td class="sell">Rate</td>
+                                        <td class="trends">Trends</td>
+                                        <td class="attachments"> </td>                
+                                    </tr>
+                                    <tr class="heading-td">
+                                        <td class="mv-icon">Lucozade</td>
+                                        <td class="coin-name">Watermelon (Fizzy)</td>
+                                        <td class="buy">Dunnes Stores - Rathmines</td>
+                                        <td class="sell">93%</td>
+                                        <td class="trends">Rising</td>
+                                        <td class="attachments"> <img src="{% static 'mainApp/images/icon/market-value/trends-up-icon.png' %}"> </td>                
+                                    </tr>
+                                    <tr class="heading-td">
+                                        <td class="mv-icon">Lucozade</td>
+                                        <td class="coin-name">Sports Drink (Original)</td>
+                                        <td class="buy">Dunnes Stores - Crumlin</td>
+                                        <td class="sell">90%</td>
+                                        <td class="trends">Falling</td>
+                                        <td class="attachments"> <img src="{% static 'mainApp/images/icon/market-value/trends-down-icon.png' %}"> </td>                
+                                    </tr>
+                                    <tr class="heading-td">
+                                        <td class="mv-icon">Lucozade</td>
+                                        <td class="coin-name">Sports Drink (XL)</td>
+                                        <td class="buy">Dunnes Stores - Crumlin</td>
+                                        <td class="sell">98%</td>
+                                        <td class="trends">Rising</td>
+                                        <td class="attachments"> <img src="{% static 'mainApp/images/icon/market-value/trends-up-icon.png' %}"> </td>                
+                                    </tr>
+                                    <tr class="heading-td">
+                                        <td class="mv-icon">Lucozade</td>
+                                        <td class="coin-name">Sports Drink (XL)</td>
+                                        <td class="buy">Dunnes Stores - Newbridge</td>
+                                        <td class="sell">91%</td>
+                                        <td class="trends">Falling</td>
+                                        <td class="attachments"> <img src="{% static 'mainApp/images/icon/market-value/trends-down-icon.png' %}"> </td>                
+                                    </tr>
 
                                 </table>
                             </div>
@@ -57,7 +120,7 @@
                 </div>
             </div>
         </div>
-        <!-- Low Stock Section End -->
+        <!-- Section End -->
         
     </div>
 </div>

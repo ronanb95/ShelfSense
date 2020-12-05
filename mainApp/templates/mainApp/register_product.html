@@ -29,7 +29,7 @@
 
   	{% if form %}
 		<div class="content-section checkBarcode2">
-			<form method="POST">
+			<form method="POST" id="innerForm">
 				{% csrf_token %}
 				<fieldset class="form-group">
 					<legend class="border-bottom mb-4">Add product to database</legend>
@@ -38,7 +38,7 @@
 				</fieldset>
 				<div class="form-group barcodebtncont">
 					<p class="btnnotice"> Press the button below, wait 5 seconds and place product on the unit until notice to remove appears </p>
-	                <button class="registerbtn" type="submit" name="run_script">Get Product Weight</button>
+	                <button class="registerbtn" type="submit" name="run_script" id="registerbtn">Get Product Weight</button>
 	            </div>
 			</form>
 		</div>

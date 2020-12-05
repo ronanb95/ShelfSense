@@ -4,6 +4,10 @@ body {
   margin-top: 5rem;
 }
 
+.lowStockArea{
+  margin-bottom: -50px;
+}
+
 h1, h2, h3, h4, h5, h6 {
   color: #444444;
 }
@@ -191,7 +195,7 @@ a.article-title:hover {
 
 }
 
-#addbtn{
+#addbtn, #dashbtn, #maintbtn{
   padding: 1.375rem 2.625rem 1.375rem 2.625rem;
   border: 0.125rem solid #303641;
   border-radius: 2rem;
@@ -225,6 +229,11 @@ a.article-title:hover {
   background-color: transparent;
   color: #5f4dee;
   text-decoration: none;
+}
+
+#dashbtn{
+  display: none;
+  margin-top: 20px;
 }
 
 .registerProduct{
@@ -275,3 +284,31 @@ a.article-title:hover {
   color:#fff;
 }
 
+#maintbtn{
+  margin-top: 20px;
+}
+
+.maintHeader{
+  text-align: center;
+}
+
+#success, #noSuccess{
+  text-align: center;
+  font-size: 150%;
+  font-weight: bold; 
+  margin: 10px 0px 10px 0px;
+}
+
+#success p{
+  color: green;
+  font-size: 25px;
+}
+
+#noSuccess p{
+  color: red;
+  font-size: 25px;
+}
+
+#successinner, #noSuccessinner{
+  display: none;
+}

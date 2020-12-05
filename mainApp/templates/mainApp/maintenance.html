@@ -1,0 +1,20 @@
+{% extends "mainApp/base.html" %}
+{% block content %}
+
+
+<div class="form-style-8" id="innerMessage">
+	<div class="maintHeader">
+		<h3 class="formTitle" id="formHeader"> Click the button below to check status of all units... </h3>
+	</div>
+	<div class = "buttonContainer">
+		<input type="button" value="Start Monitoring" id="maintbtn" class="innerbtn"/>
+	</div>
+	<div id="success">
+		<p id="successinner">Great, everything seems to be in order </p>
+	</div>
+	<div id="noSuccess">
+		<p id="noSuccessinner"> An error occured whilst connecting to the unit. Please ensure that the monitor is correctly plugged in and try again. Please contact maintenance if the problem persists.</p>
+	</div>
+</div>
+
+{% endblock content %}
