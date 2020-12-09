@@ -32,7 +32,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'mainApp.apps.MainappConfig',
-    'deviceSetup.apps.DevicesetupConfig',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -85,7 +84,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'shelfSense',
         'USER': 'root',
-        'PASSWORD': 'ucd123',
+        #########################  Add password from the presentation final slide here #######################################
+        'PASSWORD': '',
+        #########################################################################################################
         'HOST': '34.105.243.211',
         'PORT': '3306',
     }
