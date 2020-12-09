@@ -11,8 +11,34 @@ Commits regarding the build of the application can be seen in this branch. The b
 
 To view this project you cancompleted the following steps:
 
-1) Pull this repository
+1) Pull this repository and navigate to the inner django files
 
 ```bash
-cd {Project-name}
+cd ShelfSense-hardwareDjango
+cd ShelfSense-hardwareDjango
+```
+
+2) Create a clean python 3 environment and activate it
+
+3) Add requirements
+
+```bash
+pip install requirements.txt
+```
+
+Please note, there may be some issues surrounding the installation of mysqldb, please refer to the documents for your specific OS here.
+
+4) Add the password presented in the final slide of the presentation to the settings.py (line 88) to set up database connection
+
+5) Run server
+
+```bash
+python manage.py runserver
+```
+
+6) Sign into the application with the following credentials
+
+```bash
+username: ronanbyrne2
+password: demopass
 ```
