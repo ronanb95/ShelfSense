@@ -28,7 +28,7 @@ pip install requirements.txt
 
 Please note, there may be some issues surrounding the installation of mysqldb, please refer to the documents for your specific OS here.
 
-4) Add the password presented in the final slide of the presentation to the settings.py (line 88) to set up database connection
+4) Add the password presented in the final slide of the presentation to the shelfSense/settings.py (line 88) to set up database connection
 
 5) Run server
 
