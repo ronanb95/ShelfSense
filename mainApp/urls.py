@@ -23,5 +23,6 @@ urlpatterns = [
     # Start monitor form
     path('startMonitoringProcess/', views.startMonitoringProcess.as_view(), name="startMonitoringProcess"),
     # Check pi is online
-    path('checkMaintenance/', views.startMaintenanceCheck.as_view(), name="startMaintenance")
+    path('checkMaintenance/', views.startMaintenanceCheck.as_view(), name="startMaintenance"),
+    path('getrates/', views.getRates, name='getrates'),
 ]

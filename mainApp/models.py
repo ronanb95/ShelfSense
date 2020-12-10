@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.core.validators import MinValueValidator
+from django.utils import timezone
 
 #The actual weigth sensing unit and ssh details
 class Unit(models.Model):
@@ -31,16 +32,24 @@ class Product(models.Model):
 		return (self.brand + " " + self.productName )
 
 class StockControl(models.Model):
-	stockControl_id = models.IntegerField(auto_created=True, primary_key=True)
+	stockControl_id = models.CharField(max_length=45, primary_key=True)
 	#If product is deleted want to stop monitoring
 	barcode = models.OneToOneField(Product, on_delete=models.CASCADE)
 	#Want to stop monitoring if location is deleted
 	location = models.ForeignKey(Location, on_delete=models.CASCADE)
 	#PositiveIntegerField allows for 0 aswell 
 	quantity = models.PositiveIntegerField(default=0)
-	timeAdded = models.DateTimeField(auto_now_add=True)
+	timeAdded = models.DateTimeField(default=timezone.now)
 
 	def __str__(self):
 		return (self.barcode.brand + " " + self.barcode.productName + " at location " + str(self.location.locationID))
+
+#This only works for one product in one store. 
+#If wanted it to work in multiple stores would change so stock_controlid is the fk
+class CR(models.Model):
+	crID = models.PositiveIntegerField(auto_created=True, primary_key=True)
+	barcode = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
+	conversion = models.IntegerField()
+
 
 	

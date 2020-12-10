@@ -1,3 +1,7 @@
+td, th {
+  text-align: center;
+}
+
 body {
   background: #fafafa;
   color: #333333;

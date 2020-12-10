@@ -26,7 +26,7 @@ from django.forms.utils import ErrorList
 from django.http import HttpResponse
 from .forms import LoginForm, SignUpForm
 from django.contrib.auth.decorators import login_required
-
+import math
 
 # Basic homepage render
 @login_required(login_url='landing')
@@ -248,6 +248,42 @@ class startMaintenanceCheck(generics.RetrieveAPIView):
         # error_data = "Error, issue with connecting to unit..."
         return Response(response)
 
+#Pushed through l;ast minute, by no means efficent
+def getRates(request):
+
+    #Get each unique barcode in table
+    distinctBarcodes = CR.objects.values('barcode_id').distinct()
+    conversions = CR.objects.all().values('barcode_id','conversion')
+
+    completeDicts = []
+    
+    #Loop over comparing barcodes to entries
+        #Quick and dirty, will make efficent later
+    for barcode in distinctBarcodes:
+        zeros = 0
+        ones = 0
+        barcode = barcode['barcode_id']
+        for entry in conversions:
+            if entry['barcode_id'] == barcode:
+                if entry['conversion'] == 1:
+                    ones += 1
+                else:
+                    zeros += 1
+        total = zeros + ones
+        rate = math.floor((ones / total) * 100)
+        
+        #Need to get additional information for the table
+        additionalInfo = Product.objects.get(barcode=barcode)
+        brand = additionalInfo.brand
+        product = additionalInfo.productName
+        productDict = {'barcode':barcode, 'brand': brand, 'product':product, 'rate':rate}
+        completeDicts.append(productDict)
+
+        
+    #Turn to json and return
+    return HttpResponse(json.dumps(completeDicts))
+    
+
 
 
 
@@ -257,7 +293,6 @@ def displayEntireStore(request):
     :return: the info of all products
     """
     info = Product.objects.all()
-    print(info)
     tmpJson = serializers.serialize("json", info)
     tmpObj = json.loads(tmpJson)
 
@@ -367,7 +402,6 @@ def selectLocation(request):
     :return: the info of all products
     """
     info = Location.objects.all()
-    print(info)
     tmpJson = serializers.serialize("json", info)
     tmpObj = json.loads(tmpJson)
 
@@ -394,7 +428,6 @@ def lowStockLevel(request):
                                                           'barcode__brand', 'barcode__lowStockLevel', 'quantity',
                                                           'location__store')
     # print(info)
-    print(info1)
     response = json.dumps(list(info1))
     return HttpResponse(response)
 

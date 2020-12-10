@@ -82,10 +82,10 @@ DATABASES = {
     # }
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'shelfSense',
+        'NAME': 'clean',
         'USER': 'root',
         #########################  Add password from the presentation final slide here #######################################
-        'PASSWORD': '',
+        'PASSWORD': 'ubiqcomp2020',
         #########################################################################################################
         'HOST': '34.105.243.211',
         'PORT': '3306',
