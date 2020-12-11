@@ -9,6 +9,7 @@ from datetime import datetime
 import random
 
 #Read arguements pass from Django's backend, can be many
+	#Want to pass barcode 1, weight 1, barcode 2, weight 2 ..... barcode x , weight x & locationCode 
 location = (sys.argv[-1])
 
 #Select passed in products and their weights from command line
@@ -30,14 +31,18 @@ while counter < len(cmd_line_products):
 	counter += 2
 
 
-
+#Samples used to test, these are removed when on pi
 currentW = 0
 samples = [10,20,30,45,22,42,62,94,120,150,180,150,150,150,150,150,180,210,210,210,210,210,210,210]
 
-	
 
+#Add converted items in here, remove if placed back on shelf	
+picked_up = []
+placed_back = []
+non_conversion = []
+#Want to count changes and only send data when chage occurs
 changes = 0
-readings_until_send = 10
+readings_until_send = 20
 i = 0
 while i < len(samples):
 	print("Reading number:", i)
@@ -53,6 +58,10 @@ while i < len(samples):
 					product["Quantity"] += 1
 					print(product["Product"] + " : " + str(product["Quantity"]))
 					changes += 1
+					#Check if item is in picked_up list, if is then remove and mark as non conversion
+					if product["Product"] in picked_up:
+						picked_up.remove(product["Product"])
+						non_conversion.append(product["Product"])
 					#Don't want to update more than one product
 					break
 		#Stock removed
@@ -62,6 +71,8 @@ while i < len(samples):
 					product["Quantity"] -= 1
 					print(product["Product"] + " : " + str(product["Quantity"]))
 					changes += 1
+					#Add item to the conversion list
+					picked_up.append(product['Product'])
 					break
 	#Set the current weight to be the value currently detected
 	currentW = val
@@ -70,7 +81,8 @@ while i < len(samples):
 	#Only sending new information to database every 10 readings and if change detected
 	if (readings_until_send == 0 and changes > 0):
 		try:
-			connection = mysql.connector.connect(host="34.105.243.211", database="shelfSense", user="root", password="ucd123")
+																											##### From last slide of presentation #########
+			connection = mysql.connector.connect(host="34.105.243.211", database="shelfSense", user="root", password="")
 			cursor = connection.cursor()
 			#for product in products:
 				#Need to create a random stock_control id here myself
@@ -82,7 +94,22 @@ while i < len(samples):
 				dateTimeObj = datetime.now()
 				recordTuple = (product["Quantity"], dateTimeObj, product['Product'], location, randomID)
 				cursor.execute(execution, recordTuple)
-			#Want to then create a loop over products and enter the information into the database
+
+			#Then insert the conversion rates
+			executionConv = """INSERT INTO mainApp_cr (crID, barcode, conversion) values (%s, %s, %s)"""
+			for convert in picked_up:
+				#Quick fix for id issues
+				randomID = random.randint(1,100000000000)
+				recordTuple = (randomID, convert, 1)
+				cursor.execute(executionConv, recordTuple)
+
+			#Then add in the non conversions
+			for non in non_conversion:
+				#Quick fix for id issues
+				randomID = random.randint(1,100000000000)
+				recordTuple = (randomID, non, 0)
+				cursor.execute(executionConv, recordTuple)
+
 			connection.commit()
 			cursor.close()
 		except mysql.connector.Error as error:
